@@ -23,7 +23,7 @@ module.exports.sockets = {
   ***************************************************************************/
   onConnect: function(session, socket) {
 
-    ConnectionService.onConnect();
+    // By default: do nothing.
 
   },
 
