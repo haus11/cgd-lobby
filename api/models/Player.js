@@ -24,6 +24,15 @@ module.exports = {
       deleted: {
           type: 'boolean',
           defaultsTo: false
+      },
+      
+      isMaster: {
+          type: 'boolean',
+          defaultsTo: false
+      },
+      
+      server:{
+            model:'server'
       }
   }
 };

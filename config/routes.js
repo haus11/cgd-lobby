@@ -32,7 +32,7 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-   'PUT /server/:id/join': 'ServerController.join',
+   'PUT /api/server/:id/join': 'ServerController.join',
 
   /***************************************************************************
   *                                                                          *

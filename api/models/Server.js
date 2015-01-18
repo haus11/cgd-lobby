@@ -21,6 +21,11 @@ module.exports = {
           required: true,
       },
       
+      roomName: {
+          type: 'string',
+          required: true,
+      },
+      
       game:{
             model: 'game',
             type: 'json',
@@ -37,13 +42,18 @@ module.exports = {
           defaultsTo: false
       },
       
-      participants: {
+      started: {
+          type: 'boolean',
+          defaultsTo: false
+      },
+      
+      player: {
           
           collection: 'player',
           type: 'array'
       },
       
-      participantsMax: {
+      playerMax: {
           type: 'integer',
           required: true,
           defaultsTo: 10
