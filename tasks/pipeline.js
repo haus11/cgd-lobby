@@ -22,18 +22,13 @@ var cssFilesToInject = [
 // Client-side javascript files to inject in order
 // (uses Grunt-style wildcard/glob/splat expressions)
 var jsFilesToInject = [
-    
-  'vendor/jquery/dist/jquery.min.js',
-  'vendor/bootstrap/dist/js/bootstrap.min.js',
-  'vendor/sails.io.js/dist/sails.io.js',
-  'vendor/angular/angular.min.js',
-  'vendor/angular-sails/dist/angular-sails.min.js',
-  'vendor/lodash/dist/lodash.min.js',
-  'vendor/restangular/dist/restangular.min.js',
-  'vendor/angular-ui-router/release/angular-ui-router.min.js',
+  'vendor/angular/angular.js',
+  'vendor/angular-animate/angular-animate.js',
+  'vendor/angular-resource/angular-resource.js',
+  'vendor/angular-route/angular-route.js',
 
-  'app/app.js',
-  'app/**/*.js'
+  'app/scripts/app.js',
+  'app/scripts/**/*.js'
 ];
 
 
