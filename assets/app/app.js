@@ -1,11 +1,19 @@
-
+io.socket.on('connect', function() {
+                            
+                            console.log('connected');
+                            
+                            io.socket.on('server', function(body, JWR) {
+            
+                                console.log(body);
+                                console.log(JWR);
+                            }); 
+                        });
+                        
 (function(ng, _) {
     'use strict';
 
-    ng.module('equilibrium', ['restangular', 'ui.router', 'ngSails'])
-        .config(function(RestangularProvider, $sailsProvider) {
-            
-            //$sailsProvider.url = 'http://localhost:1337';
+    ng.module('equilibrium', ['restangular', 'ui.router'])
+        .config(function(RestangularProvider) {
 
             RestangularProvider
                 .addRequestInterceptor(function(el, operation) {
