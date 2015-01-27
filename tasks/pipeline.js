@@ -22,11 +22,12 @@ var cssFilesToInject = [
 // Client-side javascript files to inject in order
 // (uses Grunt-style wildcard/glob/splat expressions)
 var jsFilesToInject = [
+  'vendor/sails.io.js/dist/sails.io.js',
+  'helper/sailsAutoconnect.js',
   'vendor/angular/angular.js',
   'vendor/angular-animate/angular-animate.js',
   'vendor/angular-resource/angular-resource.js',
   'vendor/angular-route/angular-route.js',
-  'vendor/sails.io.js/dist/sails.io.js',
 
   'app/scripts/app.js',
   'app/scripts/**/*.js'

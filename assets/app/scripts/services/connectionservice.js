@@ -16,7 +16,11 @@ angular.module('equilibrium')
     // connect to the server here.
     // -----------------------------------------------------------------------------
     io.sails.autoConnect = false;
-
+    io.sails.url = 'http://localhost:1337';
 
     var socket = io.sails.connect();
+
+    return {
+      //socket : socket
+    };
   });

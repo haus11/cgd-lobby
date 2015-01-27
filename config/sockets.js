@@ -34,7 +34,7 @@ module.exports.sockets = {
   * disconnects                                                              *
   *                                                                          *
   ***************************************************************************/
-  onDisconnect: function(session, socket) {
+  afterDisconnect: function(session, socket) {
 
     ConnectionService.onDisconnect(session, socket);
   },
