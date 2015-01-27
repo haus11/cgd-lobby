@@ -7,7 +7,7 @@
  * # CreategameCtrl
  * Controller of the assetsApp
  */
-angular.module('assetsApp')
+angular.module('equilibrium')
   .controller('CreategameCtrl', function () {
 
   });

@@ -26,6 +26,7 @@ var jsFilesToInject = [
   'vendor/angular-animate/angular-animate.js',
   'vendor/angular-resource/angular-resource.js',
   'vendor/angular-route/angular-route.js',
+  'vendor/sails.io.js/dist/sails.io.js',
 
   'app/scripts/app.js',
   'app/scripts/**/*.js'

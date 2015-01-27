@@ -8,6 +8,6 @@
  * Controller of the equilibrium
  */
 angular.module('equilibrium')
-    .controller('MainCtrl', function () {
+    .controller('MainCtrl', function (connectionService) {
 
     });
