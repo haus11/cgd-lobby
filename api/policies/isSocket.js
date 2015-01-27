@@ -6,6 +6,6 @@ module.exports = function isSocket (req, res, next) {
     }
     else {
         
-        res.json({message: 'No Socket!'});
+        res.badRequest({message: 'No Socket!'});
     }
 };

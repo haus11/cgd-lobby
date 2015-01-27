@@ -7,6 +7,34 @@
 
 module.exports = {
     
+    
+    all: function(req, res) {
+        
+        var limit   = req.param('limit', 30);
+        var skip    = req.param('skip', 0);
+        
+        if (typeof req.session.player !== 'undefined' && req.session.serverID !== 'undefined') {
+
+            /*
+             * TODO: Implement notification, that socket has an active game
+             */
+        }
+
+        Server.watch(req.socket);
+
+        Server.find({limit: limit, skip: skip, sort: 'createdAt DESC' }).exec(function (err, server) {
+
+            if (!err) {
+
+                return res.json(server);
+            }
+            else {
+
+                res.badRequest(err);
+            }
+        });
+    },
+    
     create: function(req, res) {
         
         var gameID      = req.param('game_id');
@@ -246,5 +274,4 @@ module.exports = {
             }
         });
     }
-
 };
