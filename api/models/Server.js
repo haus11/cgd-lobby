@@ -21,7 +21,7 @@ module.exports = {
           required: true,
       },
       
-      roomName: {
+      roomID: {
           type: 'string',
           required: true,
       },

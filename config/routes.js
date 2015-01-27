@@ -32,7 +32,15 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-   'PUT /api/server/:id/join': 'ServerController.join',
+    /*
+     * Server Routes
+     */
+    
+   'POST    /api/server/'           : 'ServerController.create',
+   'PUT     /api/server/:id/join'   : 'ServerController.join',
+   'PUT     /api/server/:id/rejoin' : 'ServerController.rejoin',
+   
+   'GET /api/apple/round': 'apple/RoundController.test',
 
   /***************************************************************************
   *                                                                          *
