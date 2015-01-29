@@ -8,19 +8,24 @@
 module.exports = {
 
   attributes: {
-      
+
       id: {
           primaryKey: true,
           type: 'integer',
           autoIncrement: true
       },
-      
+
       type: {
           type: 'string',
           required: true,
           unique: true
       },
-      
+
+      max_sessions: {
+          type: 'integer',
+          required: true
+      },
+
       deleted: {
           type: 'boolean',
           defaultsTo: false

@@ -54,5 +54,13 @@ module.exports.policies = {
         // If an action is explicitly listed, its policy list will override the default list.
         // So, we have to list 'isLoggedIn' again for the 'edit' action if we want it to be applied.
         //edit: ['isAdmin', 'isLoggedIn']
+    },
+
+    RoundController: {
+        // Apply 'isLogged' in by default to all actions that are NOT specified below
+        '*': 'isSocket',
+        // If an action is explicitly listed, its policy list will override the default list.
+        // So, we have to list 'isLoggedIn' again for the 'edit' action if we want it to be applied.
+        //edit: ['isAdmin', 'isLoggedIn']
     }
 };

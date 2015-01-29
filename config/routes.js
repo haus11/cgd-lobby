@@ -35,16 +35,22 @@ module.exports.routes = {
     /*
      * Server Routes
      */
-    
+
    'GET     /api/server'            : 'ServerController.all',
    'POST    /api/server'            : 'ServerController.create',
    'PUT     /api/server/:id/join'   : 'ServerController.join',
    'PUT     /api/server/:id/rejoin' : 'ServerController.rejoin',
-   
+
+    /*
+     * Applemarket Routes
+     */
+
+    'GET    /api/apple/round'       : 'apple/RoundController.test'
+
    /*
     * Entry & Exit Routes
     */
-   
+
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
