@@ -1,5 +1,5 @@
 /**
- * Session.js
+ * AmPlayerHasType.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/#!documentation/models
@@ -15,29 +15,21 @@ module.exports = {
             autoIncrement: true
         },
 
-        number: {
-            type: 'integer',
-            required: true
+        player: {
+            model: 'Player'
         },
 
-        max_rounds: {
-            type: 'integer',
-            required: true
+        type: {
+            model: 'AmType'
         },
 
-        finished: {
-            type: 'boolean',
-            required: true,
-            defaultsTo: false
+        session: {
+            model: 'Session'
         },
 
         deleted: {
             type: 'boolean',
             defaultsTo: false
-        },
-
-        hosted_game: {
-            model: 'Game'
         }
     }
 };

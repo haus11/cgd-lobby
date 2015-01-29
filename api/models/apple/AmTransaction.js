@@ -1,5 +1,5 @@
 /**
- * Session.js
+ * AmTransaction.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/#!documentation/models
@@ -15,20 +15,9 @@ module.exports = {
             autoIncrement: true
         },
 
-        number: {
-            type: 'integer',
+        price: {
+            type: 'float',
             required: true
-        },
-
-        max_rounds: {
-            type: 'integer',
-            required: true
-        },
-
-        finished: {
-            type: 'boolean',
-            required: true,
-            defaultsTo: false
         },
 
         deleted: {
@@ -36,7 +25,23 @@ module.exports = {
             defaultsTo: false
         },
 
-        hosted_game: {
+        buyer: {
+            model: 'Player'
+        },
+
+        seller: {
+            model: 'Player'
+        },
+
+        round: {
+            model: 'Round'
+        },
+
+        session: {
+            model: 'Session'
+        },
+
+        game: {
             model: 'Game'
         }
     }

@@ -21,6 +21,11 @@ module.exports = {
           unique: true
       },
 
+      max_sessions: {
+          type: 'integer',
+          required: true
+      },
+
       deleted: {
           type: 'boolean',
           defaultsTo: false
