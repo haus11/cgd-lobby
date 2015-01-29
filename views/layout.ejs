@@ -33,11 +33,10 @@
             <div class="navbar navbar-default navbar-fixed-bottom">
                 <div class="btn-group">
                     <a href="#/creategame" class="btn btn-primary btn-lg pos-right">Create new</a>
-                    <a class="btn btn-lg btn-success pos-right">Connect</a>
+                    <a class="btn btn-lg btn-success pos-right" ng-click="$root.$broadcast('server:connect')">Connect</a>
                 </div>
             </div>
         </footer>
-
 
         <!--SCRIPTS-->
         <script src="/vendor/sails.io.js/dist/sails.io.js"></script>

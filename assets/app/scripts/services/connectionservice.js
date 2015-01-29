@@ -21,6 +21,31 @@ angular.module('equilibrium')
     var socket = io.sails.connect();
 
 
+    // -----------------------------------------------------------------------------
+    // Setup connect and error events
+    // TODO: Use notification service or something to notify user whats going on
+    // -----------------------------------------------------------------------------
+    socket.on('connect', function() {
+      console.log('Successfully connected.');
+    });
+
+    socket.on('reconnect', function() {
+      console.log('Successfully reconnected.');
+    });
+
+    socket.on('connect_error', function() {
+      console.log('Connection error.');
+    });
+
+    socket.on('reconnect_failed', function() {
+      console.log('Could not reconnect within specified reconnection attempts.')
+    });
+
+
+
+    // -----------------------------------------------------------------------------
+    // Public api of the connection service
+    // -----------------------------------------------------------------------------
     return {
       get: function(url, payload, callback) {
         socket.get(url, payload, function() {
@@ -32,7 +57,7 @@ angular.module('equilibrium')
       },
 
       post: function(url, payload, callback) {
-        socket.get(url, payload, function() {
+        socket.post(url, payload, function() {
           var args = arguments;
           $rootScope.$apply(function() {
             callback.apply(socket, args);
