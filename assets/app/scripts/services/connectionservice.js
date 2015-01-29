@@ -9,7 +9,7 @@
  * Service in the assetsApp.
  */
 angular.module('equilibrium')
-  .service('connectionService', function () {
+  .service('connectionService', function ($rootScope) {
     // -----------------------------------------------------------------------------
     // Create the connection to the game server. The "io" variable is the global
     // sails.io object. As an angular service will be instantiated only once, we can
@@ -20,7 +20,37 @@ angular.module('equilibrium')
 
     var socket = io.sails.connect();
 
+
     return {
-      //socket : socket
+      get: function(url, payload, callback) {
+        socket.get(url, payload, function() {
+          var args = arguments;
+          $rootScope.$apply(function() {
+            callback.apply(socket, args);
+          });
+        });
+      },
+
+      post: function(url, payload, callback) {
+        socket.get(url, payload, function() {
+          var args = arguments;
+          $rootScope.$apply(function() {
+            callback.apply(socket, args);
+          });
+        });
+      },
+
+      on: function (eventName, callback) {
+        socket.on(eventName, function () {
+          var args = arguments;
+          $rootScope.$apply(function () {
+            callback.apply(socket, args);
+          });
+        });
+      },
+
+      removeAllListeners: function() {
+        socket.removeAllListeners();
+      }
     };
   });
