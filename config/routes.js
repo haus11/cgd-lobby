@@ -40,7 +40,11 @@ module.exports.routes = {
    'POST    /api/server'            : 'ServerController.create',
    'PUT     /api/server/:id/join'   : 'ServerController.join',
    'PUT     /api/server/:id/rejoin' : 'ServerController.rejoin',
-
+   
+   /*
+    * Entry & Exit Routes
+    */
+   
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *

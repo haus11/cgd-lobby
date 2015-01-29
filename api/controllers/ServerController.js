@@ -10,9 +10,9 @@ module.exports = {
     
     all: function(req, res) {
         
-        var limit   = req.param('limit', 30);
-        var skip    = req.param('skip', 0);
-        
+        var limit   = req.param('limit')    || 30;
+        var skip    = req.param('skip')     || 0;
+
         if (typeof req.session.player !== 'undefined' && req.session.serverID !== 'undefined') {
 
             /*
@@ -21,7 +21,8 @@ module.exports = {
         }
 
         Server.watch(req.socket);
-
+        console.log(limit);
+        console.log(skip);
         Server.find({limit: limit, skip: skip, sort: 'createdAt DESC' }).exec(function (err, server) {
 
             if (!err) {
