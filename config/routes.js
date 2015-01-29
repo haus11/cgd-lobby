@@ -45,8 +45,6 @@ module.exports.routes = {
     * Entry & Exit Routes
     */
    
-   ''
-
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
