@@ -6,8 +6,8 @@
  */
 
 module.exports = {
-	
-    
+
+
     definition: function(req, res) {
         res.json(Games.definition);
     }

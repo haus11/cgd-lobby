@@ -36,8 +36,8 @@ module.exports = {
             defaultsTo: false
         },
 
-        hosted_game: {
-            model: 'Game'
+        server: {
+            model: 'Server'
         }
     }
 };

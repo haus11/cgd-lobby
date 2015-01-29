@@ -41,8 +41,8 @@ module.exports = {
             model: 'Session'
         },
 
-        game: {
-            model: 'Game'
+        server: {
+            model: 'Server'
         }
     }
 };
