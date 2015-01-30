@@ -20,27 +20,10 @@ module.exports = {
           required: true
       },
 
-      max: {
-          type: 'integer',
-          required: true
-      },
-
       finished: {
           type: 'boolean',
           required: true,
           defaultsTo: false
-      },
-
-      created_at: {
-          type: 'int',
-          required: true,
-          defaultsTo: 0000
-      },
-
-      updated_at: {
-          type: 'int',
-          required: true,
-          defaultsTo: 0000
       },
 
       deleted: {

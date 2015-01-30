@@ -6,12 +6,11 @@
  */
 
 module.exports = {
-	
-    
-    test: function(req, res) {
-        
-        res.json({msg: 'hello'});
-    },
 
+
+    test: function(req, res) {
+
+        res.json({msg: 'hello'});
+    }
 };
 

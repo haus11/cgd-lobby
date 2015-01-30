@@ -20,7 +20,7 @@ module.exports = {
             required: true
         },
 
-        max: {
+        max_rounds: {
             type: 'integer',
             required: true
         },
@@ -31,25 +31,13 @@ module.exports = {
             defaultsTo: false
         },
 
-        created_at: {
-            type: 'int',
-            required: true,
-            defaultsTo: 0000
-        },
-
-        updated_at: {
-            type: 'int',
-            required: true,
-            defaultsTo: 0000
-        },
-
         deleted: {
             type: 'boolean',
             defaultsTo: false
         },
 
-        hosted_game: {
-            model: 'Game'
+        server: {
+            model: 'Server'
         }
     }
 };

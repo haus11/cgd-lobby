@@ -10,7 +10,7 @@ and open the template in the editor.
 
 
 body {
-    padding-top: 60px;
+    padding-top: 50px;
     padding-bottom: 60px;
 }
 
@@ -23,5 +23,16 @@ footer {
     
     .btn-group {
         margin-top: 5px;
+    }
+}
+
+.list-group-item {
+    &:first-child {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    &:last-child {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
     }
 }
