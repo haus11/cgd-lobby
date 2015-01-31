@@ -16,7 +16,7 @@ angular.module('equilibrium')
     // connect to the server here.
     // -----------------------------------------------------------------------------
     io.sails.autoConnect = false;
-    io.sails.url = 'http://cgd.haus11.org/';
+    io.sails.url = 'http://haus11.org:1338/';
 
     var socket = io.sails.connect();
 
