@@ -9,7 +9,7 @@ module.exports = {
     
     
     all: function(req, res) {
-        
+        console.log(apple);
         var limit   = req.param('limit')    || 30;
         var skip    = req.param('skip')     || 0;
 
