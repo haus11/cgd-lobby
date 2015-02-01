@@ -15,35 +15,48 @@ module.exports = {
             autoIncrement: true
         },
 
-        price: {
-            type: 'float',
-            required: true
+        //price: {
+        //    type: 'float',
+        //    required: true
+        //},
+        //
+        //finished: {
+        //    type: 'boolean',
+        //    defaultsTo: false
+        //},
+
+        status: {
+            type: 'string',
+           // required: true,
+            enum: ['processing', 'waiting', 'accepted', 'undefined'],
+
+           defaultsTo: 'undefined'
         },
 
-        deleted: {
-            type: 'boolean',
-            defaultsTo: false
-        },
-
-        buyer: {
-            model: 'Player'
-        },
-
-        seller: {
-            model: 'Player'
-        },
-
-        round: {
-            model: 'Round'
-        },
-
-        session: {
-            model: 'Session'
-        },
-
-        server: {
-            model: 'Server'
-        }
+        //deleted: {
+        //    type: 'boolean',
+        //    defaultsTo: false
+        //},
+        //
+        //buyer: {
+        //    model: 'Player'
+        //},
+        //
+        //seller: {
+        //    model: 'Player'
+        //},
+        //
+        //round: {
+        //    model: 'Round'
+        //},
+        //
+        //session: {
+        //    model: 'Session'
+        //},
+        //
+        //server: {
+        //    model: 'Server'
+        //}
     }
 };
 
