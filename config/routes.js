@@ -22,9 +22,9 @@
 
 module.exports.routes = {
 
-    'api/apple/transaction': {
-        model: 'apple/amtransaction'
-    },
+    //'api/apple/transaction': {
+    //    model: 'apple/amtransaction'
+    //},
   /***************************************************************************
   *                                                                          *
   * Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, *
@@ -48,8 +48,12 @@ module.exports.routes = {
      * Applemarket Routes
      */
 
-    'GET    /api/apple/round'       : 'RoundController.test',
-    'GET    /api/apple/transaction/test' : 'apple/AmTransactionController.test'
+    'GET    /api/apple/round'                       : 'RoundController.test',
+    'GET    /api/apple/transaction/test'            : 'AmTransactionController.test',
+    'GET    /api/apple/transaction/find/player'     : 'AmTransactionController.getTransactionsOfPlayer',
+    'GET    /api/apple/transaction/find/round'      : 'AmTransactionController.getTransactionsOfRound',
+    'GET    /api/apple/transaction/find/session'    : 'AmTransactionController.getTransactionsOfSession',
+    'GET    /api/apple/transaction/find/server'     : 'AmTransactionController.getTransactionsOfServer',
 
    /*
     * Entry & Exit Routes
