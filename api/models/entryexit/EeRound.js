@@ -1,5 +1,5 @@
 /**
- * AmParticipantHasType.js
+ * EeRound.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/#!documentation/models
@@ -15,17 +15,28 @@ module.exports = {
             autoIncrement: true
         },
 
-        participant_id: {
-            model: 'Participant'
+        value: {
+            type: 'integer',
+            required: true
         },
 
-        am_type_id: {
-            model: 'AmType'
+        finished: {
+            type: 'boolean',
+            required: true,
+            defaultsTo: false
         },
 
         deleted: {
             type: 'boolean',
             defaultsTo: false
+        },
+
+        participant_id: {
+            model: 'Participant'
+        },
+
+        ee_session_id: {
+            model: 'EeSession'
         }
     }
 };

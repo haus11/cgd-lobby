@@ -1,5 +1,5 @@
 /**
- * AmParticipant.js
+ * EeSessionBuyerValues.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/#!documentation/models
@@ -15,9 +15,8 @@ module.exports = {
             autoIncrement: true
         },
 
-        player_name: {
-            type: 'string',
-            size: '200',
+        buyer_value: {
+            type: 'float',
             required: true
         },
 
@@ -26,8 +25,8 @@ module.exports = {
             defaultsTo: false
         },
 
-        hosted_game: {
-            model: 'HostedGame'
+        ee_session_id: {
+            model: 'EeSession'
         }
     }
 };

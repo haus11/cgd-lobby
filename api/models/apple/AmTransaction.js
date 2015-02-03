@@ -26,11 +26,11 @@ module.exports = {
         },
 
         buyer_id: {
-            model: 'AmParticipant'
+            model: 'Participant'
         },
 
         seller_id: {
-            model: 'AmParticipant'
+            model: 'Participant'
         },
 
         am_session_id: {

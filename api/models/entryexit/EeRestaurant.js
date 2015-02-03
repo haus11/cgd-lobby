@@ -1,5 +1,5 @@
 /**
- * AmParticipantHasType.js
+ * EeRestaurant.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/#!documentation/models
@@ -15,17 +15,23 @@ module.exports = {
             autoIncrement: true
         },
 
-        participant_id: {
-            model: 'Participant'
-        },
-
-        am_type_id: {
-            model: 'AmType'
+        name: {
+            type: 'string',
+            size: '200',
+            required: true
         },
 
         deleted: {
             type: 'boolean',
             defaultsTo: false
+        },
+
+        participant_id: {
+            model: 'Participant'
+        },
+
+        ee_round_id: {
+            model: 'EeRound'
         }
     }
 };

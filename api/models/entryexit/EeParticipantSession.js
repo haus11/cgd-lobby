@@ -1,5 +1,5 @@
 /**
- * AmParticipantHasType.js
+ * EeParticipantSession.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/#!documentation/models
@@ -15,17 +15,22 @@ module.exports = {
             autoIncrement: true
         },
 
-        participant_id: {
-            model: 'Participant'
-        },
-
-        am_type_id: {
-            model: 'AmType'
+        buyer_value: {
+            type: 'float',
+            required: true
         },
 
         deleted: {
             type: 'boolean',
             defaultsTo: false
+        },
+
+        participant_id: {
+            model: 'Participant'
+        },
+
+        ee_session_id: {
+            model: 'EeSession'
         }
     }
 };

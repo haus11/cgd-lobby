@@ -1,5 +1,5 @@
 /**
- * AmParticipantHasType.js
+ * Participant.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/#!documentation/models
@@ -15,17 +15,19 @@ module.exports = {
             autoIncrement: true
         },
 
-        participant_id: {
-            model: 'Participant'
-        },
-
-        am_type_id: {
-            model: 'AmType'
+        player_name: {
+            type: 'string',
+            size: '200',
+            required: true
         },
 
         deleted: {
             type: 'boolean',
             defaultsTo: false
+        },
+
+        hosted_game_id: {
+            model: 'HostedGame'
         }
     }
 };
