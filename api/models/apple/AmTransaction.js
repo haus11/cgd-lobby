@@ -1,5 +1,5 @@
 /**
- * AmTransaction.js
+ * AmPlayerHasType.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/#!documentation/models
@@ -20,41 +20,29 @@ module.exports = {
             required: true
         },
 
-        finished: {
-            type: 'boolean',
-            defaultsTo: false
-        },
-
-        status: {
-            type: 'string',
-            enum: ['processing', 'waiting', 'accepted', 'undefined'],
-            defaultsTo: 'undefined'
-        },
-
         deleted: {
             type: 'boolean',
             defaultsTo: false
         },
 
-        buyer: {
-            model: 'Player'
+        buyer_id: {
+            model: 'AmParticipant'
         },
 
-        seller: {
-            model: 'Player'
+        seller_id: {
+            model: 'AmParticipant'
         },
 
-        round: {
-            model: 'Round'
+        am_session_id: {
+            model: 'AmSession'
         },
 
-        session: {
-            model: 'Session'
+        am_round_id: {
+            model: 'AmRound'
         },
 
-        server: {
-            model: 'Server'
+        hosted_game_id: {
+            model: 'HostedGame'
         }
     }
 };
-

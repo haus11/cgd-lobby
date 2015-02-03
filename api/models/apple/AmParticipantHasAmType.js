@@ -1,5 +1,5 @@
 /**
- * AmPlayerHasType.js
+ * AmParticipantHasType.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/#!documentation/models
@@ -15,16 +15,12 @@ module.exports = {
             autoIncrement: true
         },
 
-        player: {
-            model: 'Player'
+        participant_id: {
+            model: 'AmParticipant'
         },
 
-        type: {
+        am_type_id: {
             model: 'AmType'
-        },
-
-        session: {
-            model: 'Session'
         },
 
         deleted: {
@@ -33,4 +29,3 @@ module.exports = {
         }
     }
 };
-

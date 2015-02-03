@@ -35,5 +35,8 @@
     "url": "git://github.com/anonymous node/sails user/equilibrium.git"
   },
   "author": "anonymous node/sails user",
-  "license": ""
+  "license": "",
+  "devDependencies": {
+    "sails-postgresql": "^0.10.13"
+  }
 }
