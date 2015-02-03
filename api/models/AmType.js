@@ -20,25 +20,25 @@ module.exports = {
             required: true
         },
 
-        description: {
-            type: 'string',
-            required: true
-        },
-
-        buyerPrice: {
-            type: 'float',
-            required: true
-        },
-
-        sellerPrice: {
-            type: 'float',
-            required: true
-        },
-
-        deleted: {
-            type: 'boolean',
-            defaultsTo: false
-        }
+        //description: {
+        //    type: 'string',
+        //    required: true
+        //},
+        //
+        //buyerPrice: {
+        //    type: 'float',
+        //    required: true
+        //},
+        //
+        //sellerPrice: {
+        //    type: 'float',
+        //    required: true
+        //},
+        //
+        //deleted: {
+        //    type: 'boolean',
+        //    defaultsTo: false
+        //}
     }
 };
 
