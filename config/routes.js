@@ -49,11 +49,12 @@ module.exports.routes = {
      */
 
     'GET    /api/apple/round'                       : 'RoundController.test',
-    'GET    /api/apple/transaction/test'            : 'AmTransactionController.test',
     'GET    /api/apple/transaction/find/player'     : 'AmTransactionController.getTransactionsOfPlayer',
     'GET    /api/apple/transaction/find/round'      : 'AmTransactionController.getTransactionsOfRound',
     'GET    /api/apple/transaction/find/session'    : 'AmTransactionController.getTransactionsOfSession',
     'GET    /api/apple/transaction/find/server'     : 'AmTransactionController.getTransactionsOfServer',
+    'GET    /api/apple/transaction/createDummy'     : 'AmTransactionController.test',
+    'GET    /api/apple/transaction/testMethod'      : 'AmTransactionController.testMethod'
 
    /*
     * Entry & Exit Routes

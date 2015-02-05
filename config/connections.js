@@ -74,7 +74,7 @@ module.exports.connections = {
   *                                                                          *
   *                                                                          *
   ***************************************************************************/
-  somePostgresqlServer: {
+  equilibriumPostgreSql: {
     adapter: 'sails-postgresql',
     host: 'localhost',
     user: 'Haus11',

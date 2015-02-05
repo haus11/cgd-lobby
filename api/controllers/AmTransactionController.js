@@ -11,9 +11,47 @@ module.exports = {
     //    model: 'amtransaction'
     //},
 
+    testMethod: function(req, res) {
+        return res.send("Hi there!");
+    },
+
+    handle: function(price, index, callback) {
+
+        if(index >= 199) {
+
+            callback();
+            return;
+        }
+
+        AmTransaction.create({
+            price: price + index
+        }).exec(function(error, transaction) {
+            if (error) {
+                callback(error);
+                return;
+            } else {
+                sails.controllers.amtransaction.handle(price, ++index, callback);
+            }
+
+        });
+
+    },
+
     test: function(req, res) {
 
-        res.json({msg: 'hello'});
+        var price = req.param('price') || 1.25;
+
+        sails.controllers.amtransaction.handle(1.2, 0, function(error) {
+
+            if(error) {
+
+                return res.badRequest(error);
+            }
+            else {
+
+                return res.json({msg: 'done'});
+            }
+        });
     },
 
     getTransactionsOfPlayer: function(req, res) {
