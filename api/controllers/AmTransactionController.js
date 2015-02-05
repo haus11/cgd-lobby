@@ -15,16 +15,32 @@ module.exports = {
         return res.send("Hi there!");
     },
 
+    all: function(req, res) {
+
+        AmTransaction.find().exec(function(error, transactions) {
+
+            if(!error) {
+
+                return res.json(transactions);
+            }
+            else {
+
+                return res.badRequest(error);
+            }
+        });
+    },
+
     handle: function(price, index, callback) {
 
-        if(index >= 199) {
+        if(index >= 28) {
 
             callback();
             return;
         }
 
         AmTransaction.create({
-            price: price + index
+            price: Math.floor(Math.random() * (40.0 - 10.0)) + 10.0,
+            transactionNmbr: index + 1
         }).exec(function(error, transaction) {
             if (error) {
                 callback(error);

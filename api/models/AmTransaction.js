@@ -16,6 +16,11 @@ module.exports = {
             autoIncrement: true
         },
 
+        transactionNmbr: {
+            type: 'integer',
+            required: 'true;'
+        },
+
         price: {
             type: 'float',
             required: true

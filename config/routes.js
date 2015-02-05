@@ -45,12 +45,26 @@ module.exports.routes = {
      * Applemarket Routes
      */
 
-    'GET    /api/apple/round'                       : 'RoundController.test',
+    'GET    /api/apple/createTransactions'         : 'AmTransactionController.test',
+    'GET    /api/apple/transactions'               : 'AmTransactionController.all',
+    'GET    /api/apple/transaction'                 : 'AmTransactionController.find',
+    'GET    /api/apple/transaction/:id'             : 'AmTransactionController.findOne',
+    'POST   /api/apple/transaction'                 : 'AmTransactionController.create',
+    'PUT    /api/apple/transaction'                 : 'AmTransactionController.update',
+    'DELETE /api/apple/transaction/:id'             : 'AmTransactionController.destroy',
+
+    'GET    /api/apple/transaction/player/:player'  : 'AmTransactionController.getTransactionsOfPlayer',
+    'GET    /api/apple/transaction/round/:round'    : 'AmTransactionController.getTransactionsOfRound',
+    'GET    /api/apple/transaction/session/:session': 'AmTransactionController.getTransactionsOfSession',
+    'GET    /api/apple/transaction/server/:server'  : 'AmTransactionController.getTransactionsOfServer',
+
+    'GET    /api/apple/transaction/testMethod'      : 'AmTransactionController.testMethod',
+
     'GET    /api/apple/type'                        : 'AmTypeController.find',
     'GET    /api/apple/type/:id'                    : 'AmTypeController.findOne',
     'POST   /api/apple/type'                        : 'AmTypeController.create',
     'PUT    /api/apple/type'                        : 'AmTypeController.update',
-    'DELETE /api/apple/type/:id'                    : 'AmTypeController.destroy',
+    'DELETE /api/apple/type/:id'                    : 'AmTypeController.destroy'
 
    /*
     * Entry & Exit Routes
