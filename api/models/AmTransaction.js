@@ -9,6 +9,7 @@ module.exports = {
 
     attributes: {
 
+
         id: {
             primaryKey: true,
             type: 'integer',
@@ -20,29 +21,40 @@ module.exports = {
             required: true
         },
 
+        finished: {
+            type: 'boolean',
+            defaultsTo: false
+        },
+
+        status: {
+            type: 'string',
+            enum: ['processing', 'waiting', 'accepted', 'undefined'],
+            defaultsTo: 'undefined'
+        },
+
         deleted: {
             type: 'boolean',
             defaultsTo: false
         },
 
-        buyer_id: {
-            model: 'Participant'
+        buyer: {
+            model: 'Player'
         },
 
-        seller_id: {
-            model: 'Participant'
+        seller: {
+            model: 'Player'
         },
 
-        am_session_id: {
-            model: 'AmSession'
+        round: {
+            model: 'Round'
         },
 
-        am_round_id: {
-            model: 'AmRound'
+        session: {
+            model: 'Session'
         },
 
-        hosted_game_id: {
-            model: 'HostedGame'
+        server: {
+            model: 'Server'
         }
     }
 };

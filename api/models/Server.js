@@ -57,6 +57,11 @@ module.exports = {
           type: 'integer',
           required: true,
           defaultsTo: 10
+      },
+
+      max_rounds: {
+          type: 'integer',
+          required: true
       }
   }
 };

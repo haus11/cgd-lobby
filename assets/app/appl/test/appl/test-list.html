@@ -1,0 +1,12 @@
+<h1>Appl/tests</h1>
+<ul>
+    <li ng-repeat="appl/test in appl/tests">
+        <div>
+            <p ng-repeat="(key, val) in model_def">{{key}} : {{appl/test[key]}}</p>
+        </div>
+        <a href="" ui-sref="appl/tests.edit({ id: appl/test.id })">Edit</a>
+        <a href="" ng-click="remove(appl/test)">Delete</a>
+    </li>
+</ul>
+<div ng-show="appl/tests.length === 0">Looks like you haven't added any appl/tests yet?</div>
+<a ng-hide="adding" ui-sref="appl/tests.add">Add A New Appl/test</a>

@@ -25,12 +25,12 @@ module.exports = {
             required: true
         },
 
-        buyerPrice: {
+        buyer_price: {
             type: 'float',
             required: true
         },
 
-        sellerPrice: {
+        seller_price: {
             type: 'float',
             required: true
         },

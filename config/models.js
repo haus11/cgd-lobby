@@ -17,7 +17,11 @@ module.exports.models = {
   * connections (see `config/connections.js`)                                *
   *                                                                          *
   ***************************************************************************/
+<<<<<<< HEAD
   connection: 'equilibriumPostgreSql',
+=======
+  connection: 'localDiskDb',
+>>>>>>> 637df9a0094072371644e817d2f8b82c58820b97
 
   /***************************************************************************
   *                                                                          *

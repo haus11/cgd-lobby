@@ -22,9 +22,6 @@
 
 module.exports.routes = {
 
-    //'api/apple/transaction': {
-    //    model: 'apple/amtransaction'
-    //},
   /***************************************************************************
   *                                                                          *
   * Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, *
@@ -47,14 +44,28 @@ module.exports.routes = {
     /*
      * Applemarket Routes
      */
+<<<<<<< HEAD
 
     'GET    /api/apple/round'                       : 'RoundController.test',
+=======
+    'GET    /api/apple/transaction'                 : 'AmTransactionController.find',
+    'GET    /api/apple/transaction/:id'             : 'AmTransactionController.findOne',
+    'POST   /api/apple/transaction'                 : 'AmTransactionController.create',
+    'PUT    /api/apple/transaction'                 : 'AmTransactionController.update',
+    'DELETE /api/apple/transaction/:id'             : 'AmTransactionController.destroy',
+>>>>>>> 637df9a0094072371644e817d2f8b82c58820b97
     'GET    /api/apple/transaction/find/player'     : 'AmTransactionController.getTransactionsOfPlayer',
     'GET    /api/apple/transaction/find/round'      : 'AmTransactionController.getTransactionsOfRound',
     'GET    /api/apple/transaction/find/session'    : 'AmTransactionController.getTransactionsOfSession',
     'GET    /api/apple/transaction/find/server'     : 'AmTransactionController.getTransactionsOfServer',
     'GET    /api/apple/transaction/createDummy'     : 'AmTransactionController.test',
     'GET    /api/apple/transaction/testMethod'      : 'AmTransactionController.testMethod'
+
+    'GET    /api/apple/type'                        : 'AmTypeController.find',
+    'GET    /api/apple/type/:id'                    : 'AmTypeController.findOne',
+    'POST   /api/apple/type'                        : 'AmTypeController.create',
+    'PUT    /api/apple/type'                        : 'AmTypeController.update',
+    'DELETE /api/apple/type/:id'                    : 'AmTypeController.destroy',
 
    /*
     * Entry & Exit Routes
