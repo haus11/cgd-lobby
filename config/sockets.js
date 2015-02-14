@@ -19,8 +19,8 @@ module.exports.sockets = {
   *                                                                          *
   ***************************************************************************/
   afterDisconnect: function(session, socket, cb) {
-
-    ConnectionService.onDisconnect(session, socket, cb);
+       // By default: do nothing.
+       return cb();
   },
 
 

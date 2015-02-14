@@ -42,6 +42,7 @@ module.exports = {
             defaultsTo: false
         },
 
+        /*
         buyer: {
             model: 'Player'
         },
@@ -57,9 +58,9 @@ module.exports = {
         session: {
             model: 'Session'
         },
-
-        server: {
-            model: 'Server'
+        */
+        game: {
+            model: 'game'
         }
     }
 };

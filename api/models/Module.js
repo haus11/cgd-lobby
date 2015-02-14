@@ -1,5 +1,5 @@
 /**
-* Game.js
+* Module.js
 *
 * @description :: TODO: You might write a short summary of how this model works and what it represents here.
 * @docs        :: http://sailsjs.org/#!documentation/models
@@ -17,39 +17,19 @@ module.exports = {
 
     name: {
       type: 'string',
+      required: true,
+      unique: true
+    },
+
+    secret: {
+      type: 'string',
       required: true
     },
 
-    playerMax: {
-      type: 'integer',
-      required: false,
-      defaultsTo: 20
-    },
-
-    sessionMax: {
-      type: 'integer',
-      required: false,
-      defaultsTo: 3
-    },
-
-    module:{
-      model: 'module',
-      required: true
-    },
-
-    user: {
-      collection: 'user',
-      type: 'array'
-    },
-
-    started: {
-      type: 'boolean',
-      defaultsTo: false
-    },
-
-    finished: {
-      type: 'boolean',
-      defaultsTo: false
+    url: {
+      type: 'string',
+      required: true,
+      unique: true
     },
 
     deleted: {
@@ -60,6 +40,7 @@ module.exports = {
     toJSON: function() {
       var obj = this.toObject();
       delete obj.deleted;
+      delete obj.secret;
       return obj;
     }
   }

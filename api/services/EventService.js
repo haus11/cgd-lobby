@@ -1,12 +1,12 @@
+/*
+ * EventService
+ */
+
 module.exports = {
-    
-    /*
-     * DEFAULT SERVER EVENTS
-     */
-    
-    SERVER_PLAYER_JOIN          : 'server:playerjoin',
-    SERVER_PLAYER_REJOIN        : 'server:playerrejoin',
-    SERVER_PLAYER_LEAVE         : 'server:playerleave',
-    SERVER_PLAYER_DISCONNECT    : 'server:playerdisconnect'
-    
+
+  GAME_PLAYER_JOIN  : 'game:playerJoined',
+  GAME_PLAYER_LEAVE : 'game:playerLeaved',
+  GAME_START        : 'game:started',
+  GAME_FINISH       : 'game:finished',
+  GAME_DESTROY      : 'game:destroyed'
 };

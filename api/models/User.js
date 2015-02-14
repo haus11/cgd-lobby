@@ -1,5 +1,5 @@
 /**
-* Game.js
+* User.js
 *
 * @description :: TODO: You might write a short summary of how this model works and what it represents here.
 * @docs        :: http://sailsjs.org/#!documentation/models
@@ -20,41 +20,21 @@ module.exports = {
       required: true
     },
 
-    playerMax: {
-      type: 'integer',
-      required: false,
-      defaultsTo: 20
-    },
-
-    sessionMax: {
-      type: 'integer',
-      required: false,
-      defaultsTo: 3
-    },
-
-    module:{
-      model: 'module',
-      required: true
-    },
-
-    user: {
-      collection: 'user',
-      type: 'array'
-    },
-
-    started: {
-      type: 'boolean',
-      defaultsTo: false
-    },
-
-    finished: {
-      type: 'boolean',
-      defaultsTo: false
-    },
-
     deleted: {
       type: 'boolean',
       defaultsTo: false
+    },
+
+    type: {
+      type: 'string',
+      enum: ['player', 'spectator', 'master'],
+      defaultsTo: 'player',
+      required: true
+    },
+
+    game:{
+      model:'game',
+      required: true
     },
 
     toJSON: function() {

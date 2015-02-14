@@ -36,35 +36,37 @@ module.exports.routes = {
      * Server Routes
      */
 
-   'GET     /api/server'            : 'ServerController.all',
-   'POST    /api/server'            : 'ServerController.create',
-   'PUT     /api/server/:id/join'   : 'ServerController.join',
-   'PUT     /api/server/:id/rejoin' : 'ServerController.rejoin',
+   'GET    /games'                     : 'GameController.all',
+   'POST   /game'                      : 'GameController.create',
+   'PUT    /game/:id/join'             : 'GameController.join',
+   'PUT    /game/:id/leave'            : 'GameController.leave',
+   'PUT    /game/:id'                  : 'GameController.update',
+   'DELETE /game/:id'                  : 'GameController.destroy',
 
     /*
      * Applemarket Routes
      */
 
-    'GET    /api/apple/createTransactions'         : 'AmTransactionController.test',
-    'GET    /api/apple/transactions'               : 'AmTransactionController.all',
-    'GET    /api/apple/transaction'                 : 'AmTransactionController.find',
-    'GET    /api/apple/transaction/:id'             : 'AmTransactionController.findOne',
-    'POST   /api/apple/transaction'                 : 'AmTransactionController.create',
-    'PUT    /api/apple/transaction'                 : 'AmTransactionController.update',
-    'DELETE /api/apple/transaction/:id'             : 'AmTransactionController.destroy',
+    'GET    /apple/createTransactions'         : 'AmTransactionController.test',
+    'GET    /apple/transactions'               : 'AmTransactionController.all',
+    'GET    /apple/transaction'                 : 'AmTransactionController.find',
+    'GET    /apple/transaction/:id'             : 'AmTransactionController.findOne',
+    'POST   /apple/transaction'                 : 'AmTransactionController.create',
+    'PUT    /apple/transaction'                 : 'AmTransactionController.update',
+    'DELETE /apple/transaction/:id'             : 'AmTransactionController.destroy',
 
-    'GET    /api/apple/transaction/player/:player'  : 'AmTransactionController.getTransactionsOfPlayer',
-    'GET    /api/apple/transaction/round/:round'    : 'AmTransactionController.getTransactionsOfRound',
-    'GET    /api/apple/transaction/session/:session': 'AmTransactionController.getTransactionsOfSession',
-    'GET    /api/apple/transaction/server/:server'  : 'AmTransactionController.getTransactionsOfServer',
+    'GET    /apple/transaction/player/:player'  : 'AmTransactionController.getTransactionsOfPlayer',
+    'GET    /apple/transaction/round/:round'    : 'AmTransactionController.getTransactionsOfRound',
+    'GET    /apple/transaction/session/:session': 'AmTransactionController.getTransactionsOfSession',
+    'GET    /apple/transaction/server/:server'  : 'AmTransactionController.getTransactionsOfServer',
 
-    'GET    /api/apple/transaction/testMethod'      : 'AmTransactionController.testMethod',
+    'GET    /apple/transaction/testMethod'      : 'AmTransactionController.testMethod',
 
-    'GET    /api/apple/type'                        : 'AmTypeController.find',
-    'GET    /api/apple/type/:id'                    : 'AmTypeController.findOne',
-    'POST   /api/apple/type'                        : 'AmTypeController.create',
-    'PUT    /api/apple/type'                        : 'AmTypeController.update',
-    'DELETE /api/apple/type/:id'                    : 'AmTypeController.destroy'
+    'GET    /apple/type'                        : 'AmTypeController.find',
+    'GET    /apple/type/:id'                    : 'AmTypeController.findOne',
+    'POST   /apple/type'                        : 'AmTypeController.create',
+    'PUT    /apple/type'                        : 'AmTypeController.update',
+    'DELETE /apple/type/:id'                    : 'AmTypeController.destroy'
 
    /*
     * Entry & Exit Routes

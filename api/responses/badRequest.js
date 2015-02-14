@@ -22,8 +22,10 @@ module.exports = function badRequest(data, options) {
   var res = this.res;
   var sails = req._sails;
 
+
   // Set status code
   res.status(400);
+
 
   // Log error to console
   if (data !== undefined) {
