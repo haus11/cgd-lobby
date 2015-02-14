@@ -76,6 +76,8 @@ module.exports = {
               sails.sockets.emit(UserService.socketToID(Game.subscribers(savedGame)), EventService.GAME_FINISH, savedGame);
             }
 
+            Game.publishUpdate(savedGame.id, savedGame);
+
 
             return res.json(savedGame);
           });
@@ -221,7 +223,7 @@ module.exports = {
 
           game.save(function(error, savedGame) {
 
-            sails.sockets.emit(UserService.socketToID(Game.subscribers(game)), EventService.GAME_DESTROY, savedGame);
+              Game.publishDestroy(savedGame.id);
 
             return res.json(savedGame);
           });
