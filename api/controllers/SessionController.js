@@ -43,6 +43,11 @@ module.exports = {
                         throw 'Game was not started yet.';
                     }
 
+                    if(game.finished) {
+
+                        throw 'Game is finished.';
+                    }
+
                     targetGame = game;
                     return Session.find({game: game.id});
                 }
@@ -108,6 +113,11 @@ module.exports = {
                     if(!game.started) {
 
                         throw 'Game was not started yet.';
+                    }
+
+                    if(game.finished) {
+
+                        throw 'Game is finished.';
                     }
 
                     return Session.findOne({game: gameID, count: sessionCount, deleted: false, finished: false}).populate('rounds');
