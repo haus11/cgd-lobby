@@ -37,6 +37,11 @@ module.exports = {
       required: true
     },
 
+    sessions: {
+        collection: 'session',
+        type: 'array'
+    },
+
     user: {
       collection: 'user',
       type: 'array'

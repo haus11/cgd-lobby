@@ -22,26 +22,36 @@
 
 module.exports.routes = {
 
-  /***************************************************************************
-  *                                                                          *
-  * Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, *
-  * etc. depending on your default view engine) your home page.              *
-  *                                                                          *
-  * (Alternatively, remove this and add an `index.html` file in your         *
-  * `assets` directory)                                                      *
-  *                                                                          *
-  ***************************************************************************/
+    /***************************************************************************
+     *                                                                          *
+     * Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, *
+     * etc. depending on your default view engine) your home page.              *
+     *                                                                          *
+     * (Alternatively, remove this and add an `index.html` file in your         *
+     * `assets` directory)                                                      *
+     *                                                                          *
+     ***************************************************************************/
 
     /*
      * Server Routes
      */
 
-   'GET    /games'                     : 'GameController.all',
-   'POST   /game'                      : 'GameController.create',
-   'PUT    /game/:id/join'             : 'GameController.join',
-   'PUT    /game/:id/leave'            : 'GameController.leave',
-   'PUT    /game/:id'                  : 'GameController.update',
-   'DELETE /game/:id'                  : 'GameController.destroy',
+    'GET    /games'                          : 'GameController.all',
+    'POST   /game'                           : 'GameController.create',
+    'PUT    /game/:gameid/join'              : 'GameController.join',
+    'PUT    /game/:gameid/leave'             : 'GameController.leave',
+    'PUT    /game/:gameid'                   : 'GameController.update',
+    'DELETE /game/:gameid'                   : 'GameController.destroy',
+    'GET    /game/:gameid'                   : 'GameController.get',
+
+    /*
+     * Session Routes
+     */
+
+    'POST  /game/:gameid/session'                   : 'SessionController.create',
+    'POST  /game/:gameid/session/:session/round'    : 'SessionController.createRound',
+    'GET   /game/:gameid/sessions'                  : 'SessionController.allForGame',
+
 
     /*
      * Applemarket Routes
@@ -68,18 +78,18 @@ module.exports.routes = {
     'PUT    /apple/type'                        : 'AmTypeController.update',
     'DELETE /apple/type/:id'                    : 'AmTypeController.destroy'
 
-   /*
-    * Entry & Exit Routes
-    */
+    /*
+     * Entry & Exit Routes
+     */
 
-  /***************************************************************************
-  *                                                                          *
-  * Custom routes here...                                                    *
-  *                                                                          *
-  *  If a request to a URL doesn't match any of the custom routes above, it  *
-  * is matched against Sails route blueprints. See `config/blueprints.js`    *
-  * for configuration options and examples.                                  *
-  *                                                                          *
-  ***************************************************************************/
+    /***************************************************************************
+     *                                                                          *
+     * Custom routes here...                                                    *
+     *                                                                          *
+     *  If a request to a URL doesn't match any of the custom routes above, it  *
+     * is matched against Sails route blueprints. See `config/blueprints.js`    *
+     * for configuration options and examples.                                  *
+     *                                                                          *
+     ***************************************************************************/
 
 };

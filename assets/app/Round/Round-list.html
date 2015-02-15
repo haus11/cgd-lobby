@@ -1,0 +1,12 @@
+<h1>Rounds</h1>
+<ul>
+    <li ng-repeat="Round in Rounds">
+        <div>
+            <p ng-repeat="(key, val) in model_def">{{key}} : {{Round[key]}}</p>
+        </div>
+        <a href="" ui-sref="Rounds.edit({ id: Round.id })">Edit</a>
+        <a href="" ng-click="remove(Round)">Delete</a>
+    </li>
+</ul>
+<div ng-show="Rounds.length === 0">Looks like you haven't added any Rounds yet?</div>
+<a ng-hide="adding" ui-sref="Rounds.add">Add A New Round</a>
