@@ -43,7 +43,9 @@ module.exports.policies = {
         leave: ['isParticipating'],
         join: [],
         create: [],
-        destroy: ['isParticipating', 'isMaster']
+        destroy: ['isParticipating', 'isMaster'],
+        start: ['isParticipating', 'isMaster'],
+        finish: ['isParticipating', 'isMaster']
     },
 
     SessionController: {

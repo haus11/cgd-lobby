@@ -30,11 +30,18 @@ module.exports = {
         var gameID = req.param('gameid');
         var targetGame = null;
         var targetSession = null;
+        var sessionsPlayed = null;
 
         Game.findOne({id: gameID}).populate('sessions')
             .then(function(game) {
 
                 if(typeof game !== 'undefined') {
+
+
+                    if(!game.started) {
+
+                        throw 'Game was not started yet.';
+                    }
 
                     targetGame = game;
                     return Session.find({game: game.id});
@@ -46,13 +53,20 @@ module.exports = {
             })
             .then(function(gameSessions) {
 
+                sessionsPlayed = gameSessions;
 
-                if(gameSessions.length >= targetGame.sessionMax) {
+                if(gameSessions.length > 0) {
 
-                    throw 'Maximum amount for sessions reached';
+                    var lastSession = gameSessions[gameSessions.length - 1];
+                    return Round.update({session: lastSession.id}, {finished: true});
                 }
 
-                return Session.create({game: gameID, count: gameSessions.length + 1});
+                return null;
+
+            })
+            .then(function(rounds) {
+
+                return Session.create({game: gameID, count: sessionsPlayed.length + 1});
             })
             .then(function(session) {
 
@@ -86,7 +100,23 @@ module.exports = {
         var targetSession = null;
         var targetRound = null;
 
-        Session.findOne({game: gameID, count: sessionCount, deleted: false, finished: false}).populate('rounds')
+        Game.findOne({id: gameID}).populate('sessions')
+            .then(function(game) {
+
+                if(typeof game !== 'undefined') {
+
+                    if(!game.started) {
+
+                        throw 'Game was not started yet.';
+                    }
+
+                    return Session.findOne({game: gameID, count: sessionCount, deleted: false, finished: false}).populate('rounds');
+                }
+                else {
+
+                    throw 'Game could not be found';
+                }
+            })
             .then(function(session) {
 
                 if(typeof session !== 'undefined') {

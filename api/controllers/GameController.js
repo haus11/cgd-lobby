@@ -57,101 +57,127 @@ module.exports = {
             });
     },
 
-    update: function(req, res) {
+    start: function(req, res) {
+
 
         var gameID = req.param('gameid');
 
-        /*
-         console.log(req.allParams());
-         Game.update({id: gameID}, req.allParams())
-         .then(function(game) {
+        Game.findOne({id: gameID})
+            .then(function(game) {
 
-         console.log(game);
+                if(typeof game !== 'undefined') {
 
-         return res.json(game);
-         })
-         .catch(function(error) {
-         sails.log.error(error);
-         return res.badRequest(error);
-         });
-         */
+                    game.started = true;
+
+                    return game.save();
+                }
+                else {
+
+                    throw 'Game could not be found';
+                }
+            })
+            .then(function(game) {
+
+                sails.sockets.emit(UserService.socketToID(Game.subscribers(game)), EventService.GAME_START, game);
+
+                return res.json(game);
+            })
+            .catch(function(error) {
+                sails.log.error(error);
+                return res.badRequest(error);
+            });
+    },
+
+    finish: function(req, res) {
+
+
+        var gameID = req.param('gameid');
+        var targetGame = null;
+
+        Game.findOne({id: gameID})
+            .then(function(game) {
+
+                if(typeof game !== 'undefined') {
+
+                    console.log('game')
+                    if(!game.started) {
+
+                        throw 'Game was not started yet.';
+                    }
+
+                    game.finished = true;
+
+                    return game.save();
+                }
+                else {
+
+                    throw 'Game could not be found';
+                }
+            })
+            .then(function(game) {
+
+                targetGame = game;
+                return Session.update({game: game.id}, {finished: true});
+            })
+            .then(function() {
+
+                return Session.findOne({game: gameID, sort: 'createdAt DESC'});
+            })
+            .then(function(session) {
+
+                if(typeof session !== 'undefined' && session !== null) {
+
+                    return Round.findOne({session: session.id, sort: 'createdAt DESC'});
+                }
+
+                return null;
+            })
+            .then(function(round) {
+
+                if(typeof round !== 'undefined' && round !== null) {
+
+                    round.finished = true;
+                    return round.save();
+                }
+
+                return null;
+            })
+            .then(function() {
+
+                sails.sockets.emit(UserService.socketToID(Game.subscribers(targetGame)), EventService.GAME_FINISH, targetGame);
+
+                return res.json(targetGame);
+            })
+            .catch(function(error) {
+                sails.log.error(error);
+                return res.badRequest(error);
+            });
+    },
+
+    update: function(req, res) {
+
+        var gameID = req.param('gameid');
 
         Game.findOne({id: gameID})
             .then(function(game) {
 
                 if(typeof game !== 'undefined')  {
 
-                    var gameWasStartedBefore = game.started;
-                    var gameWasFinishedBefore = game.finished;
-
-                    game.started = typeof req.param('started') !== 'undefined' ? req.param('started') : game.started;
-                    game.finished = typeof req.param('finished') !== 'undefined' ? req.param('finished') : game.finished;
-                    game.sessionMax = typeof req.param('sessionMax') !== 'undefined' ? req.param('sessionMax') : parseInt(game.sessionMax);
+                    game.name = typeof req.param('name') !== 'undefined' ? req.param('name') : game.name;
                     game.playerMax = typeof req.param('playerMax') !== 'undefined' ? req.param('playerMax') : parseInt(game.playerMax);
 
-                    game.save(function(error, savedGame) {
-
-                        if(error) {
-
-                            throw error;
-                        }
-
-                        var updateFinishPromise = null;
-
-                        if(!gameWasStartedBefore && savedGame.started) {
-
-                            sails.sockets.emit(UserService.socketToID(gameSubscribers), EventService.GAME_START, savedGame);
-                        }
-
-                        if(!gameWasFinishedBefore && savedGame.finished) {
-
-
-                            updateFinishPromise = Session.findOne({game: gameID, sort: 'createdAt DESC'})
-                                .populate('rounds')
-                                .then(function(session) {
-
-                                    var sessionPromise = null;
-
-                                    if(typeof session !== 'undefined') {
-
-                                        session.finished = true;
-
-                                        if(session.rounds.length > 0) {
-
-                                            session.rounds[session.rounds.length - 1].finished = true;
-                                        }
-
-                                        sessionPromise = session.save();
-                                    }
-
-                                    return sessionPromise;
-                                });
-                        }
-
-                        if(updateFinishPromise !== null) {
-
-                            updateFinishPromise.then(function() {
-
-                                console.log('emit');
-                                sails.sockets.emit(UserService.socketToID(Game.subscribers(savedGame)), EventService.GAME_FINISH, savedGame);
-
-                                Game.publishUpdate(savedGame.id, savedGame);
-                                return res.json(savedGame);
-                            });
-                        }
-                        else {
-
-                            Game.publishUpdate(savedGame.id, savedGame);
-                            return res.json(savedGame);
-                        }
-
-
-                    });
+                    return game.save();
                 }
                 else {
 
                     throw 'Game with ID ' + gameID + ' not found!';
                 }
+            })
+            .then(function(savedGame) {
+
+                Game.publishUpdate(savedGame.id, savedGame);
+
+                return res.json(savedGame);
             })
             .catch(function(error) {
 
@@ -239,6 +265,11 @@ module.exports = {
 
                         gameToJoin = game;
 
+                        if(game.user.length >= game.playerMax) {
+
+                            throw "Maximum amount of players for this game is reached.";
+                        }
+
                         return User.create({name: username, type: 'player', game: game.id});
                     }
 
@@ -314,7 +345,6 @@ module.exports = {
         }
 
         var playerMax = req.param('playerMax') || 20;
-        var sessionMax = req.param('sessionMax') || 3;
         var name = req.param('name');
         var moduleSecret = req.param('secret');
         var createdGame = null;
@@ -329,7 +359,7 @@ module.exports = {
                 }
                 else {
 
-                    return Game.create({playerMax: playerMax, sessionMax: sessionMax, name: name, module: module.id}).populate('user').populate('module');
+                    return Game.create({playerMax: playerMax, name: name, module: module.id}).populate('user').populate('module');
                 }
             })
             .then(function(game) {

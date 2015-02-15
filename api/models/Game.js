@@ -26,12 +26,6 @@ module.exports = {
       defaultsTo: 20
     },
 
-    sessionMax: {
-      type: 'integer',
-      required: false,
-      defaultsTo: 3
-    },
-
     module:{
       model: 'module',
       required: true
