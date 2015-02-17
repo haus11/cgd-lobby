@@ -235,10 +235,10 @@ module.exports = {
 
     join: function(req, res) {
 
-        if(req.session.gameID) {
-
-            return res.badRequest('You are already participating on a server');
-        }
+        //if(req.session.gameID) {
+        //
+        //    return res.badRequest('You are already participating on a server');
+        //}
 
         var gameID = req.param('gameID');
         var username = req.param('username');

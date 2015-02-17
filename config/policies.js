@@ -39,7 +39,7 @@ module.exports.policies = {
 
         '*': ['isSocket'],
         all: [],
-        update: ['isParticipating', 'isMaster'],
+        //update: ['isParticipating', 'isMaster'],
         leave: ['isParticipating'],
         join: [],
         create: [],
