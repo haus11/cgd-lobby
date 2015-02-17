@@ -7,26 +7,20 @@ and open the template in the editor.
     Created on : 13.01.2015, 18:17:29
     Author     : moehlone
 */
-
-
 body {
-    padding-top: 50px;
-    padding-bottom: 60px;
+  padding-top: 50px;
 }
 
 footer {
     .navbar-fixed-bottom {
-        margin-bottom: 40px;
+        margin-bottom: 15px;
     }
-
     text-align: center;
-    
-    .btn-group {
-        margin-top: 5px;
-    }
 }
 
 .list-group-item {
+    line-height: 34px;
+  
     &:first-child {
         border-top-left-radius: 0;
         border-top-right-radius: 0;
@@ -35,4 +29,19 @@ footer {
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
     }
+}
+
+.list-group-item > .badge {
+  float: none;
+  margin-left: 8px;
+}
+
+.btn-connect {
+  margin-top: 15px;
+}
+
+.btn-create-game {
+  max-width: 300px;
+  text-transform: uppercase;
+  margin: 20px auto;
 }
