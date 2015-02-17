@@ -9,8 +9,16 @@ module.exports = {
 
     all: function(req, res) {
 
-        var gameId    = req.session.gameID;
-        Offer.find();
+        Offer.find({})
+            .then(function(offers) {
+
+                return res.json(offers);
+            })
+            .catch(function(error) {
+
+                sails.log.error(error);
+                return res.badRequest(error);
+            });
     },
 
     create: function(req, res) {

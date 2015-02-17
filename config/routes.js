@@ -81,7 +81,8 @@ module.exports.routes = {
     'DELETE /apple/type/:id'                    : 'AmTypeController.destroy',
 
     'POST  /apple/offer/'                       : 'OfferController.create',
-    'PUT   /apple/offer/:offerid'               : 'OfferController.update'
+    'PUT   /apple/offer/:offerid'               : 'OfferController.update',
+    'GET   /apple/offer/'                       : 'OfferController.all'
 
     /*
      * Entry & Exit Routes
