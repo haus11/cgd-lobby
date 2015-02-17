@@ -8,25 +8,39 @@
  * Controller of the equilibrium
  */
 angular.module('equilibrium')
-    .controller('MainCtrl', function ($scope, $rootScope, connectionService) {
-        $scope.availableGames = [];
+    .controller('MainCtrl', function ($document, $scope, $rootScope, connectionService, dataService) {
+        $scope.availableGames = dataService.getAvailableGames();
+
+        $scope.generateGameUrl = function(game) {
+          return dataService.getGameUrl(game.module, game.id);
+        };
 
 
-        connectionService.get('/api/server', {skip: 0, limit: 10}, function(data, jwres) {
-            $scope.availableGames = data;
+        connectionService.on('connect', function() {
+          connectionService.get('/games', null)
+            .then(function (data) {
+              for (var indexOfGame = 0; indexOfGame < data.length; indexOfGame++)
+              {
+                if (data[indexOfGame].started === false)
+                {
+                  dataService.addGame(data[indexOfGame]);
+                }
+              }
+            })
+            .catch(function(reason) {
+              console.log(reason);
+          });
         });
 
-        connectionService.on('server', function(data) {
-            console.log(data);
-            $scope.availableGames.push(data.data);
-        });
 
-        $rootScope.$on('server:connect', function() {
-
-            // Create a new server for testing
-            connectionService.post('/api/server', {game_id: 1, name: 'Cool Game', player_max: 20}, function(data, status) {
-                console.log(status);
-
-            });
+        connectionService.on('game', function(data) {
+          if (data.verb === 'created')
+          {
+           dataService.addGame(data.data);
+          }
+          else if (data.verb === 'destroyed')
+          {
+            dataService.removeGame(data.data.id);
+          }
         });
     });
