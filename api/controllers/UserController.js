@@ -8,7 +8,7 @@
 module.exports = {
 
 
-  authenticate: function(req, res) {
+    authenticate: function(req, res) {
 
 
     if(req.session.authenticated) {

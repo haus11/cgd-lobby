@@ -59,8 +59,8 @@ module.exports.routes = {
      * Applemarket Routes
      */
 
-    'GET    /apple/createTransactions'         : 'AmTransactionController.test',
-    'GET    /apple/transactions'               : 'AmTransactionController.all',
+    'GET    /apple/createTransactions'          : 'AmTransactionController.test',
+    'GET    /apple/transactions'                : 'AmTransactionController.all',
     'GET    /apple/transaction'                 : 'AmTransactionController.find',
     'GET    /apple/transaction/:id'             : 'AmTransactionController.findOne',
     'POST   /apple/transaction'                 : 'AmTransactionController.create',
@@ -78,7 +78,10 @@ module.exports.routes = {
     'GET    /apple/type/:id'                    : 'AmTypeController.findOne',
     'POST   /apple/type'                        : 'AmTypeController.create',
     'PUT    /apple/type'                        : 'AmTypeController.update',
-    'DELETE /apple/type/:id'                    : 'AmTypeController.destroy'
+    'DELETE /apple/type/:id'                    : 'AmTypeController.destroy',
+
+    'POST  /apple/offer/'                       : 'OfferController.create',
+    'PUT   /apple/offer/:offerid'               : 'OfferController.update'
 
     /*
      * Entry & Exit Routes

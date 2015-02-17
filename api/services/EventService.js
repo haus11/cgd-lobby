@@ -9,6 +9,8 @@ module.exports = {
     GAME_START          : 'game:started',
     GAME_FINISH         : 'game:finished',
 
+    OFFER_CREATED       : 'offer:create',
+
 
     SESSION_NEW         : 'session:new',
     SESSION_NEW_ROUND   : 'session:newRound'
