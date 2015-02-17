@@ -30,7 +30,9 @@ var jsFilesToInject = [
   'vendor/angular-route/angular-route.js',
 
   'app/scripts/app.js',
-  'app/scripts/**/*.js'
+  'app/scripts/services/connectionservice.js',
+  'app/scripts/services/dataservice.js',
+  'app/scripts/controllers/**/*.js'
 ];
 
 

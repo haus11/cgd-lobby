@@ -1,0 +1,12 @@
+<h1>Offers</h1>
+<ul>
+    <li ng-repeat="Offer in Offers">
+        <div>
+            <p ng-repeat="(key, val) in model_def">{{key}} : {{Offer[key]}}</p>
+        </div>
+        <a href="" ui-sref="Offers.edit({ id: Offer.id })">Edit</a>
+        <a href="" ng-click="remove(Offer)">Delete</a>
+    </li>
+</ul>
+<div ng-show="Offers.length === 0">Looks like you haven't added any Offers yet?</div>
+<a ng-hide="adding" ui-sref="Offers.add">Add A New Offer</a>
