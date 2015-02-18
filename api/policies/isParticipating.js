@@ -8,6 +8,7 @@
  */
 module.exports = function(req, res, next) {
 
+
   if(req.session.gameID && req.session.userID) {
 
         if(typeof req.param('gameid') !== 'undefined') {

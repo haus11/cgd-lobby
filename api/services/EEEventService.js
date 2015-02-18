@@ -13,6 +13,7 @@ module.exports = {
     SURVEY_FINISH       : 'survey:finished',
     SURVEY_TIMEOUT      : 'survey:timeout',
     SURVEY_TICK         : 'survey:tick',
+    SURVEY_RESTAURANTS  : 'survey:allRestaurantsCreated',
 
 
 
