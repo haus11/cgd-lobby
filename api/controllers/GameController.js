@@ -83,8 +83,8 @@ module.exports = {
             })
             .then(function(game) {
 
-                SessionService.setCurrentRound(gameID, false);
-                SessionService.setCurrentSession(gameID, false);
+                SessionService.setCurrentRound(gameID, null);
+                SessionService.setCurrentSession(gameID, null);
 
                 sails.sockets.emit(UserService.socketToID(Game.subscribers(game)), EventService.GAME_START, game);
 
