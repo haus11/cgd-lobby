@@ -35,7 +35,7 @@ module.exports = {
             defaultsTo: false
         },
 
-        rounds: {
+        offers: {
             collection: 'offer'
         },
 

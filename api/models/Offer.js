@@ -32,6 +32,7 @@ module.exports = {
 
       round: {
           model: 'round',
+          required: true
       },
 
       trades: {

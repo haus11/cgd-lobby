@@ -21,15 +21,54 @@ module.exports = {
             });
     },
 
+    get: function(req, res) {
+
+      var offerId = req.param('offerid');
+
+      Offer.find({id: offerId})
+        .then(function(offers) {
+
+          return res.json(offers);
+        })
+        .catch(function(error) {
+
+          sails.log.error(error);
+          return res.badRequest(error);
+        });
+    },
+
+    getRound: function(req, res) {
+
+      var gameId = req.session.gameID;
+      var roundCount = req.param('roundcount');
+
+      Session.findOne({game: gameId})
+        .then(function (session) {
+
+          console.log(session.id);
+          Round.findOne({count: roundCount, session: session.id})
+            .then(function(round) {
+
+              return res.json(round);
+            })
+            .catch(function (error) {
+
+              return console.log(res.badRequest(" " + error));
+            });
+        })
+        .catch(function (error) {
+          return console.log(res.badRequest(" " + error));
+        });
+    },
+
     create: function(req, res) {
 
         var price     = req.param('price');
         var userId    = req.param('userId');
         var gameId    = req.session.gameID;
+        var roundId   = SessionService.getCurrentRound(gameId);
 
-
-
-       Offer.create({price: price, user: userId})
+       Offer.create({price: price, user: userId, round: parseInt(roundId)})
            .then(function (offer) {
 
                sails.sockets.emit(UserService.socketToID(Game.subscribers(gameId)), EventService.OFFER_CREATED, offer);
