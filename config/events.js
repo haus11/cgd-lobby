@@ -1,3 +1,3 @@
-module.exports.bootstrap = function() {
+module.exports.events = function() {
 
 };
