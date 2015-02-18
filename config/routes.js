@@ -93,7 +93,7 @@ module.exports.routes = {
     'GET   /apple/offer/'                       : 'OfferController.all',
     'GET   /apple/offer/:offerid'               : 'OfferController.get',
     'GET   /apple/offer/round/:roundcount'      : 'OfferController.getRound',
-    'GET   /apple/offer/session/:sessioncount'  : 'OfferController.getSession'
+    'GET   /apple/offer/currentRound'           : 'OfferController.getCurrentRound'
 
     /*
      * Entry & Exit Routes

@@ -53,12 +53,28 @@ module.exports = {
             })
             .catch(function (error) {
 
-              return console.log(res.badRequest(" " + error));
+              return sails.log(res.badRequest(" " + error));
             });
         })
         .catch(function (error) {
-          return console.log(res.badRequest(" " + error));
+          return sails.log(res.badRequest(" " + error));
         });
+    },
+
+    getCurrentRound: function(req, res) {
+
+      var gameId  = req.session.gameID;
+      var round   = SessionService.getCurrentRound(gameId);
+
+      Offer.find({round: round.id})
+        .then(function (rounds) {
+
+          return res.json(rounds);
+        })
+        .catch(function (error) {
+
+          return sails.log(res.badRequest(" " + error));
+        })
     },
 
     create: function(req, res) {
