@@ -50,15 +50,19 @@ module.exports.routes = {
      * Session Routes
      */
 
-    'POST  /game/:gameid/session'                   : 'SessionController.create',
-    'POST  /game/:gameid/session/:session/round'    : 'SessionController.createRound',
+    'POST  /game/session'                           : 'SessionController.create',
+    'POST  /game/session/round'                     : 'SessionController.createRound',
     'GET   /game/:gameid/sessions'                  : 'SessionController.allForGame',
+
+    'POST  /apple/session'                          : 'AmSessionController.create',
 
     /*
      * EntryExit Routes
      */
 
     'POST  /ee/restaurant'                          : 'EERestaurantController.create',
+    'PUT   /ee/restaurant'                          : 'EERestaurantController.update',
+
     'POST  /ee/survey'                              : 'EESurveyController.create',
     'POST  /ee/survey/vote'                         : 'EESurveyController.vote',
 

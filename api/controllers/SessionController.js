@@ -27,12 +27,12 @@ module.exports = {
 
     create: function(req, res) {
 
-        var gameID = req.param('gameid');
+        var gameID = req.session.gameID;
         var targetGame = null;
         var targetSession = null;
         var sessionsPlayed = null;
 
-        Game.findOne({id: gameID}).populate('sessions')
+        Game.findOne({id: gameID}).populate('sessions').populate('user')
             .then(function(game) {
 
                 if(typeof game !== 'undefined') {
@@ -96,9 +96,18 @@ module.exports = {
 
                 }*/
 
-                sails.sockets.emit(UserService.socketToID(Game.subscribers(targetGame)), EventService.SESSION_NEW, targetSession);
 
-                return res.json(targetSession);
+                if(typeof res.cb === 'function') {
+
+                    return res.cb(targetGame, targetSession);
+                }
+                else {
+
+                    sails.sockets.emit(UserService.socketToID(Game.subscribers(targetGame)), EventService.SESSION_NEW, targetSession);
+
+                    res.status(200);
+                    return res.json(targetSession);
+                }
             })
             .catch(function(error) {
 
@@ -109,12 +118,12 @@ module.exports = {
 
     createRound: function(req, res) {
 
-        var gameID = req.param('gameid');
-        var sessionCount = req.param('session');
+        var gameID = req.session.gameID;
+        var session = SessionService.getCurrentSession(gameID);
         var targetSession = null;
         var targetRound = null;
 
-        Game.findOne({id: gameID}).populate('sessions')
+        Game.findOne({id: gameID})
             .then(function(game) {
 
                 if(typeof game !== 'undefined') {
@@ -129,7 +138,12 @@ module.exports = {
                         throw 'Game is finished.';
                     }
 
-                    return Session.findOne({game: gameID, count: sessionCount, deleted: false, finished: false}).populate('rounds');
+                    if(session === null) {
+
+                        throw 'There is no active session!';
+                    }
+
+                    return Session.findOne({game: gameID, count: session.count, deleted: false, finished: false}).populate('rounds');
                 }
                 else {
 

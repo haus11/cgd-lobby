@@ -1,0 +1,12 @@
+<h1>Amroles</h1>
+<ul>
+    <li ng-repeat="AmRole in Amroles">
+        <div>
+            <p ng-repeat="(key, val) in model_def">{{key}} : {{AmRole[key]}}</p>
+        </div>
+        <a href="" ui-sref="Amroles.edit({ id: AmRole.id })">Edit</a>
+        <a href="" ng-click="remove(AmRole)">Delete</a>
+    </li>
+</ul>
+<div ng-show="Amroles.length === 0">Looks like you haven't added any Amroles yet?</div>
+<a ng-hide="adding" ui-sref="Amroles.add">Add A New AmRole</a>
