@@ -67,6 +67,11 @@ module.exports = {
 
                 if(typeof game !== 'undefined') {
 
+                    if(game.started) {
+
+                      throw 'Game is already started';
+                    }
+
                     game.started = true;
 
                     return game.save();
@@ -102,10 +107,15 @@ module.exports = {
 
                 if(typeof game !== 'undefined') {
 
-                    console.log('game')
+
                     if(!game.started) {
 
                         throw 'Game was not started yet.';
+                    }
+
+                    if(game.finished) {
+
+                      throw 'Game is already finished';
                     }
 
                     game.finished = true;
