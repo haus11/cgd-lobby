@@ -35,6 +35,10 @@ module.exports = {
             defaultsTo: false
         },
 
+        rounds: {
+            collection: 'offer'
+        },
+
         toJSON: function () {
             var obj = this.toObject();
             delete obj.session;

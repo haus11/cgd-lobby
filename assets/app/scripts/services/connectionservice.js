@@ -9,14 +9,14 @@
  * Service in the assetsApp.
  */
 angular.module('equilibrium')
-  .service('connectionService', function ($rootScope) {
+  .service('connectionService', function ($rootScope, $q) {
     // -----------------------------------------------------------------------------
     // Create the connection to the game server. The "io" variable is the global
     // sails.io object. As an angular service will be instantiated only once, we can
     // connect to the server here.
     // -----------------------------------------------------------------------------
     io.sails.autoConnect = false;
-    io.sails.url = 'http://haus11.org:1338/';
+    io.sails.url = 'http://localhost:1338/' //'http://192.168.0.198:1338/'; //
 
     var socket = io.sails.connect();
 
@@ -38,29 +38,59 @@ angular.module('equilibrium')
     });
 
     socket.on('reconnect_failed', function() {
-      console.log('Could not reconnect within specified reconnection attempts.')
+      console.log('Could not reconnect within specified reconnection attempts.');
     });
 
 
+    // -----------------------------------------------------------------------------
+    // Checks an api response and resolves or rejects the promise
+    // -----------------------------------------------------------------------------
+    function checkResponse(data, jwrs, resolveCallback, rejectCallback)
+    {
+      if (jwrs.statusCode === 200)
+      {
+        $rootScope.$apply(function() {
+          resolveCallback(data);
+        });
+      }
+      else
+      {
+        $rootScope.$apply(function() {
+          rejectCallback(jwrs.body);
+        });
+      }
+    }
 
     // -----------------------------------------------------------------------------
     // Public api of the connection service
     // -----------------------------------------------------------------------------
     return {
-      get: function(url, payload, callback) {
-        socket.get(url, payload, function() {
-          var args = arguments;
-          $rootScope.$apply(function() {
-            callback.apply(socket, args);
+      get: function(url, payload) {
+        return $q(function(resolve, reject) {
+          if (!socket.isConnected()) { reject('Socket is not connected!'); }
+
+          socket.get(url, payload, function(data, jwrs) {
+            checkResponse(data, jwrs, resolve, reject);
           });
         });
       },
 
-      post: function(url, payload, callback) {
-        socket.post(url, payload, function() {
-          var args = arguments;
-          $rootScope.$apply(function() {
-            callback.apply(socket, args);
+      post: function(url, payload) {
+        return $q(function(resolve, reject) {
+          if (!socket.isConnected()) { reject('Socket is not connected!'); }
+
+          socket.post(url, payload, function(data, jwrs) {
+            checkResponse(data, jwrs, resolve, reject);
+          });
+        });
+      },
+
+      put: function(url, payload) {
+        return $q(function(resolve, reject) {
+          if (!socket.isConnected()) { reject('Socket is not connected!'); }
+
+          socket.put(url, payload, function(data, jwrs) {
+            checkResponse(data, jwrs, resolve, reject);
           });
         });
       },
@@ -79,3 +109,4 @@ angular.module('equilibrium')
       }
     };
   });
+
