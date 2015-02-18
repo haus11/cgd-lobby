@@ -24,6 +24,7 @@ module.exports = {
 
         if(typeof gameID !== 'undefined' && typeof sessionCount !== 'undefined') {
 
+            this.games['GAME' + gameID] = {};
             this.games['GAME' + gameID].currentSession = parseInt(sessionCount);
         }
     },
@@ -42,6 +43,7 @@ module.exports = {
 
         if(typeof gameID !== 'undefined' && typeof roundCount !== 'undefined') {
 
+            this.games['GAME' + gameID] = {};
             this.games['GAME' + gameID].currentRound = parseInt(roundCount);
         }
     }
