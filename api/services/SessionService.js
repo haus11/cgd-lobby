@@ -17,15 +17,15 @@ module.exports = {
             return this.games['GAME' + gameID].currentSession;
         }
 
-        return false;
+        return null;
     },
 
-    setCurrentSession: function(gameID, sessionCount) {
+    setCurrentSession: function(gameID, session) {
 
-        if(typeof gameID !== 'undefined' && typeof sessionCount !== 'undefined') {
+        if(typeof gameID !== 'undefined' && typeof session !== 'undefined') {
 
             this.games['GAME' + gameID] = {};
-            this.games['GAME' + gameID].currentSession = parseInt(sessionCount);
+            this.games['GAME' + gameID].currentSession = session;
         }
     },
 
@@ -36,15 +36,15 @@ module.exports = {
             return this.games['GAME' + gameID].currentRound;
         }
 
-        return false;
+        return null;
     },
 
-    setCurrentRound: function(gameID, roundCount) {
+    setCurrentRound: function(gameID, round) {
 
-        if(typeof gameID !== 'undefined' && typeof roundCount !== 'undefined') {
+        if(typeof gameID !== 'undefined' && typeof round !== 'undefined') {
 
             this.games['GAME' + gameID] = {};
-            this.games['GAME' + gameID].currentRound = parseInt(roundCount);
+            this.games['GAME' + gameID].currentRound = round;
         }
     }
 

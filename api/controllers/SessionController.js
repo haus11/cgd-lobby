@@ -83,12 +83,18 @@ module.exports = {
             })
             .then(function(game) {
 
-                SessionService.setCurrentRound(gameID, false);
-                SessionService.setCurrentSession(gameID, targetSession.count);
+                SessionService.setCurrentRound(gameID, null);
+                SessionService.setCurrentSession(gameID, targetSession);
 
                 return Session.update({game: game.id, count: { '<': targetSession.count }}, {finished: true});
             })
             .then(function() {
+
+                /*if(HookService.has(gameID, sails.config.hooks.SESSION_START)) {
+
+                  HookService.check(gameID, )
+
+                }*/
 
                 sails.sockets.emit(UserService.socketToID(Game.subscribers(targetGame)), EventService.SESSION_NEW, targetSession);
 
@@ -157,7 +163,7 @@ module.exports = {
             })
             .then(function(session) {
 
-                SessionService.setCurrentRound(gameID, targetRound.count);
+                SessionService.setCurrentRound(gameID, targetRound);
 
                 return Round.update({session: session.id, count: { '<': targetRound.count }}, {finished: true});
             })
