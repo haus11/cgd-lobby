@@ -90,7 +90,10 @@ module.exports.routes = {
 
     'POST  /apple/offer/'                       : 'OfferController.create',
     'PUT   /apple/offer/:offerid'               : 'OfferController.update',
-    'GET   /apple/offer/'                       : 'OfferController.all'
+    'GET   /apple/offer/'                       : 'OfferController.all',
+    'GET   /apple/offer/:offerid'               : 'OfferController.get',
+    'GET   /apple/offer/round/:roundcount'      : 'OfferController.getRound',
+    'GET   /apple/offer/session/:sessioncount'  : 'OfferController.getSession'
 
     /*
      * Entry & Exit Routes
