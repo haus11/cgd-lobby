@@ -14,7 +14,8 @@ module.exports = {
          * TODO: implement emit to all players if all restaurants are created
          */
 
-    },
+
+    }
 
 };
 

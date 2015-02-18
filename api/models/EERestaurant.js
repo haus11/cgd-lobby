@@ -9,6 +9,28 @@ module.exports = {
 
   attributes: {
 
+    id: {
+      primaryKey: true,
+      type: 'integer',
+      autoIncrement: true
+    },
+
+    name: {
+      type: 'string',
+      required: true
+    },
+
+    user: {
+      model: 'user'
+    },
+
+    offer: {
+      model: 'offer'
+    },
+
+    round: {
+      model: 'round'
+    }
   }
 };
 

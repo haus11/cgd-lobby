@@ -15,7 +15,7 @@ module.exports = {
             autoIncrement: true
         },
 
-        offeredPrice: {
+        price: {
             type: 'float',
             required: true
         },

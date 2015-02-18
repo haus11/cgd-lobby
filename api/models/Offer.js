@@ -20,12 +20,6 @@ module.exports = {
           required: true
       },
 
-      settledPrice: {
-          type: 'float',
-          defaultsTo: 0.0,
-          required: true
-      },
-
       user: {
           model: 'user'
       },

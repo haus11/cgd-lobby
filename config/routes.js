@@ -58,9 +58,16 @@ module.exports.routes = {
      * EntryExit Routes
      */
 
-    'POST  /ee/restaurant'              : 'EERestaurantController.create',
-    'POST  /ee/survey'                  : 'EESurveyController.create',
-    'POST  /ee/survey/vote'             : 'EESurveyController.vote',
+    'POST  /ee/restaurant'                          : 'EERestaurantController.create',
+    'POST  /ee/survey'                              : 'EESurveyController.create',
+    'POST  /ee/survey/vote'                         : 'EESurveyController.vote',
+
+    'POST  /ee/offer/'                              : 'OfferController.create',
+    'PUT   /ee/offer/:offerid'                      : 'OfferController.update',
+    'GET   /ee/offer/'                              : 'OfferController.all',
+    'GET   /ee/offer/:offerid'                      : 'OfferController.get',
+    'GET   /ee/offer/round/:roundcount'             : 'OfferController.getRound',
+    'GET   /ee/offer/currentRound'                  : 'OfferController.getCurrentRound',
 
 
     /*
@@ -94,10 +101,6 @@ module.exports.routes = {
     'GET   /apple/offer/:offerid'               : 'OfferController.get',
     'GET   /apple/offer/round/:roundcount'      : 'OfferController.getRound',
     'GET   /apple/offer/currentRound'           : 'OfferController.getCurrentRound'
-
-    /*
-     * Entry & Exit Routes
-     */
 
     /***************************************************************************
      *                                                                          *
