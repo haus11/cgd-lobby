@@ -46,8 +46,6 @@ module.exports = {
 
         if(typeof surveyID !== 'undefined' && typeof userID !== 'undefined' && this.surveys.hasOwnProperty('SURVEY'+surveyID)) {
 
-            console.log('a');
-
             var survey = this.surveys['SURVEY'+surveyID];
 
             if(survey.userRestaurantIDs.length <= 0) {
@@ -55,21 +53,15 @@ module.exports = {
                 throw 'All user already created their restaurants.';
             }
 
-
-            console.log('b');
             for(var i = 0; i < survey.userRestaurantIDs.length; ++i) {
 
 
-                console.log('c');
                 if(survey.userRestaurantIDs[i] === userID) {
 
-
-                    console.log('d');
                     survey.userRestaurantIDs.splice(i, 1);
 
                     if(survey.userRestaurantIDs.length <= 0) {
 
-                        console.log('event trigger');
                         sails.sockets.emit(UserService.socketToID(Game.subscribers(survey.gameID)), EEEventService.SURVEY_RESTAURANTS);
                     }
 
