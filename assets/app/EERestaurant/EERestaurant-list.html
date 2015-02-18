@@ -1,0 +1,12 @@
+<h1>Eerestaurants</h1>
+<ul>
+    <li ng-repeat="EERestaurant in Eerestaurants">
+        <div>
+            <p ng-repeat="(key, val) in model_def">{{key}} : {{EERestaurant[key]}}</p>
+        </div>
+        <a href="" ui-sref="Eerestaurants.edit({ id: EERestaurant.id })">Edit</a>
+        <a href="" ng-click="remove(EERestaurant)">Delete</a>
+    </li>
+</ul>
+<div ng-show="Eerestaurants.length === 0">Looks like you haven't added any Eerestaurants yet?</div>
+<a ng-hide="adding" ui-sref="Eerestaurants.add">Add A New EERestaurant</a>

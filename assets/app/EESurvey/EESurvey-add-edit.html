@@ -1,0 +1,9 @@
+<h1>Add / Edit EESurvey</h1>
+<form name="new_EESurvey_form">
+    <div ng-repeat="(attr_name, attr_value) in model_def">
+        <label for="{{attr_name}}">{{attr_name}}</label>
+        <input type="text" ng-model="EESurvey[attr_name]" name="{{attr_name}}" />
+    </div>
+    <button ng-click="save(EESurvey)">Save EESurvey</button>
+    <button ui-sref="Eesurveys.list">Cancel</button>
+</form>

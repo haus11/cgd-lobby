@@ -83,6 +83,9 @@ module.exports = {
             })
             .then(function(game) {
 
+                SessionService.setCurrentRound(gameID, false);
+                SessionService.setCurrentSession(gameID, targetSession.count);
+
                 return Session.update({game: game.id, count: { '<': targetSession.count }}, {finished: true});
             })
             .then(function() {
@@ -153,6 +156,8 @@ module.exports = {
                 return targetSession.save();
             })
             .then(function(session) {
+
+                SessionService.setCurrentRound(gameID, targetRound.count);
 
                 return Round.update({session: session.id, count: { '<': targetRound.count }}, {finished: true});
             })

@@ -2,6 +2,11 @@
  * EventService
  */
 
+
+/*
+ * TODO: refactor events to sails.config.events file (events.js in config folder)
+ */
+
 module.exports = {
 
     GAME_PLAYER_JOIN    : 'game:playerJoined',

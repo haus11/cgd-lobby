@@ -54,6 +54,14 @@ module.exports.routes = {
     'POST  /game/:gameid/session/:session/round'    : 'SessionController.createRound',
     'GET   /game/:gameid/sessions'                  : 'SessionController.allForGame',
 
+    /*
+     * EntryExit Routes
+     */
+
+    'POST  /ee/restaurant'              : 'EERestaurantController.create',
+    'POST  /ee/survey'                  : 'EESurveyController.create',
+    'POST  /ee/survey/vote'             : 'EESurveyController.vote',
+
 
     /*
      * Applemarket Routes

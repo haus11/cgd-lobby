@@ -8,9 +8,19 @@
  */
 module.exports = function(req, res, next) {
 
-  if(req.session.gameID && req.session.userID && req.session.gameID === parseInt(req.param('gameid'))) {
+  if(req.session.gameID && req.session.userID) {
 
-    return next();
+        if(typeof req.param('gameid') !== 'undefined') {
+
+            if(req.session.gameID === parseInt(req.param('gameid'))) {
+
+                return next();
+            }
+        }
+        else {
+
+            return next();
+        }
   }
 
   // User is not allowed

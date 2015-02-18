@@ -48,6 +48,19 @@ module.exports.policies = {
         finish: ['isParticipating', 'isMaster']
     },
 
+    EERestaurantController: {
+
+        '*': ['isSocket'],
+        create: ['isParticipating', 'isMaster']
+    },
+
+    EESurveyController: {
+
+        '*': ['isSocket'],
+        create: ['isParticipating', 'isMaster'],
+        vote: ['isParticipating']
+    },
+
     SessionController: {
 
         '*': ['isSocket'],

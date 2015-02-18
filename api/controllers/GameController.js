@@ -78,6 +78,9 @@ module.exports = {
             })
             .then(function(game) {
 
+                SessionService.setCurrentRound(gameID, false);
+                SessionService.setCurrentSession(gameID, false);
+
                 sails.sockets.emit(UserService.socketToID(Game.subscribers(game)), EventService.GAME_START, game);
 
                 return res.json(game);
@@ -163,6 +166,11 @@ module.exports = {
 
                 if(typeof game !== 'undefined')  {
 
+                    if(game.started) {
+
+                        throw 'Game was already started, can not change settings!';
+                    }
+
                     game.name = typeof req.param('name') !== 'undefined' ? req.param('name') : game.name;
                     game.playerMax = typeof req.param('playerMax') !== 'undefined' ? req.param('playerMax') : parseInt(game.playerMax);
 
@@ -240,7 +248,7 @@ module.exports = {
             return res.badRequest('You are already participating on a server');
         }
 
-        var gameID = req.param('gameID');
+        var gameID = req.param('gameid');
         var username = req.param('username');
         var gameToJoin = null;
 
@@ -265,7 +273,12 @@ module.exports = {
 
                         gameToJoin = game;
 
-                        if(game.user.length >= game.playerMax) {
+                        /*
+                         * TODO: refactor gamemaster as seperate attribute in model (and spectators as list)
+                         */
+
+                        //substract gamemaster
+                        if(game.user.length - 1 >= game.playerMax) {
 
                             throw "Maximum amount of players for this game is reached.";
                         }
@@ -293,7 +306,7 @@ module.exports = {
                             sails.sockets.emit(UserService.socketToID(Game.subscribers(game)), EventService.GAME_PLAYER_JOIN, user);
                             Game.subscribe(req.socket, game);
 
-                            return res.json(game);
+                            return res.json({game: game, user: user});
                         }
                     });
 
@@ -388,7 +401,7 @@ module.exports = {
                         req.session.gameID = game.id;
                         UserService.set(user, req.socket);
 
-                        return res.json(game);
+                        return res.json({game: game, user: user});
                     }
                 });
             })

@@ -32,7 +32,7 @@ module.exports = {
       return false;
   },
 
-  socketToID: function (sockets) {
+  socketToID: function (sockets, preventSocket) {
 
     if (sockets instanceof Array) {
 
@@ -40,7 +40,14 @@ module.exports = {
 
       for (var index = 0; index < sockets.length; ++index) {
 
-        socketIDArray.push(sails.sockets.id(sockets[index]));
+          var currentSocketID = sails.sockets.id(sockets[index]);
+
+          if(typeof preventSocket === 'object' && sails.sockets.id(preventSocket) === currentSocketID) {
+
+              continue;
+          }
+
+          socketIDArray.push(currentSocketID);
       }
 
       return socketIDArray;
