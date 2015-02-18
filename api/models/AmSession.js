@@ -1,5 +1,5 @@
 /**
-* Trade.js
+* AmSession.js
 *
 * @description :: TODO: You might write a short summary of how this model works and what it represents here.
 * @docs        :: http://sailsjs.org/#!documentation/models
@@ -15,23 +15,26 @@ module.exports = {
             autoIncrement: true
         },
 
-        price: {
-            type: 'float',
+        session: {
+            model: 'session',
             required: true
         },
 
-        accepted: {
+        role: {
+            model: 'amrole',
+            type: 'array'
+        },
+
+        deleted: {
             type: 'boolean',
-            defaultsTo: false,
-            required: true
+            defaultsTo: false
         },
 
-        user: {
-            model: 'user'
-        },
-
-        offer: {
-            model: 'offer'
+        toJSON: function () {
+            var obj = this.toObject();
+            delete obj.deleted;
+            return obj;
         }
     }
 };
+

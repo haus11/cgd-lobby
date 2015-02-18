@@ -73,7 +73,8 @@ module.exports = {
         })
         .catch(function (error) {
 
-          return sails.log(res.badRequest(" " + error));
+          sails.log.error(error);
+          return res.badRequest(error);
         })
     },
 

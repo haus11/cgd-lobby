@@ -1,0 +1,9 @@
+<h1>Add / Edit AmSession</h1>
+<form name="new_AmSession_form">
+    <div ng-repeat="(attr_name, attr_value) in model_def">
+        <label for="{{attr_name}}">{{attr_name}}</label>
+        <input type="text" ng-model="AmSession[attr_name]" name="{{attr_name}}" />
+    </div>
+    <button ng-click="save(AmSession)">Save AmSession</button>
+    <button ui-sref="Amsessions.list">Cancel</button>
+</form>

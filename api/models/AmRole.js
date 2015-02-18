@@ -1,5 +1,5 @@
 /**
-* Offer.js
+* AmRole.js
 *
 * @description :: TODO: You might write a short summary of how this model works and what it represents here.
 * @docs        :: http://sailsjs.org/#!documentation/models
@@ -15,22 +15,16 @@ module.exports = {
           autoIncrement: true
       },
 
-      price: {
+      type: {
+          type: 'string',
+          enum: ['a', 'b', 'c', 'd', 'e'],
+          defaultsTo: 'a',
+          required: true
+      },
+
+      maxValue: {
           type: 'float',
           required: true
-      },
-
-      user: {
-          model: 'user'
-      },
-
-      round: {
-          model: 'round',
-          required: true
-      },
-
-      trades: {
-          collection: 'trade'
       }
   }
 };

@@ -12,5 +12,10 @@ module.exports = {
     SURVEY_CONSULT      : 'survey:consult',
     SURVEY_FINISH       : 'survey:finished',
     SURVEY_TIMEOUT      : 'survey:timeout',
-    SURVEY_TICK         : 'survey:tick'
+    SURVEY_TICK         : 'survey:tick',
+
+
+
+    RESTAURANT_CREATE   : 'restaurant:created',
+    RESTAURANT_UPDATE   : 'restaurant:updated'
 };
