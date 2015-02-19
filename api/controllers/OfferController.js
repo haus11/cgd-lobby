@@ -22,6 +22,10 @@ module.exports = {
        Offer.create({price: price, seller: userID, round: round.id, tradesMax: 1})
            .then(function (offer) {
 
+               return Offer.findOne({id: offer.id}).populate('seller');
+           })
+           .then(function(offer) {
+
                sails.sockets.emit(UserService.socketToID(Game.subscribers(gameID)), EventService.OFFER_CREATED, offer);
                return res.json(offer);
            })
