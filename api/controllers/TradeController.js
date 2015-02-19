@@ -128,6 +128,7 @@ module.exports = {
         var gameID = req.session.gameID;
 
         var tradeID = req.param('tradeid');
+        var targetTrade = null;
 
         if(typeof tradeID === 'undefined') {
 
@@ -156,6 +157,8 @@ module.exports = {
             })
             .then(function(trade) {
 
+                targetTrade = trade;
+
                 //update comes from buyer
                 if(trade.buyer.id === userID) {
 
@@ -167,8 +170,10 @@ module.exports = {
                     sails.sockets.emit(sails.sockets.id(UserService.get(trade.buyer.id).socket), EventService.TRADE_ACCEPT, trade);
                 }
 
+                return Offer.findOne({id: trade.offer.id}).populate('trades');
+            })
+            .then(function(offer) {
 
-                /*
                 var acceptedTrades = 0;
 
                 for(var index = 0; index < offer.trades.length; ++index) {
@@ -181,10 +186,10 @@ module.exports = {
 
                 if(acceptedTrades >= offer.tradesMax) {
 
-                    sails.sockets.emit(sails.sockets.id(UserService.get(offer.seller.id).socket), EventService.OFFER_DONE, offer);
-                }*/
+                    sails.sockets.emit(UserService.socketToID(Game.subscribers(gameID)), EventService.OFFER_DONE, offer);
+                }
 
-                return res.json(trade);
+                return res.json(targetTrade);
             })
             .catch(function(error) {
 
