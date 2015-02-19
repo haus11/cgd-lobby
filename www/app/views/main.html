@@ -1,0 +1,16 @@
+<div class="list-group">
+    <a href="{{ generateGameUrl(game) }}"
+       ng-repeat="game in availableGames"
+       class="list-group-item">{{ game.name }}
+        <span class="badge">{{ game.playerMax }}</span>
+        <button class="btn btn-default pull-right" href="{{ generateGameUrl(game) }}"><strong>Join</strong></button>
+    </a>
+</div>
+
+<footer>
+    <div class="navbar navbar-default navbar-fixed-bottom">
+        <a href="#/creategame" class="btn btn-primary btn-lg btn-connect">Create new</a>
+    </div>
+</footer>
+
+

@@ -1,0 +1,12 @@
+<h1>Eesurveys</h1>
+<ul>
+    <li ng-repeat="EESurvey in Eesurveys">
+        <div>
+            <p ng-repeat="(key, val) in model_def">{{key}} : {{EESurvey[key]}}</p>
+        </div>
+        <a href="" ui-sref="Eesurveys.edit({ id: EESurvey.id })">Edit</a>
+        <a href="" ng-click="remove(EESurvey)">Delete</a>
+    </li>
+</ul>
+<div ng-show="Eesurveys.length === 0">Looks like you haven't added any Eesurveys yet?</div>
+<a ng-hide="adding" ui-sref="Eesurveys.add">Add A New EESurvey</a>

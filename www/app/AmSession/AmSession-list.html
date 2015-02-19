@@ -1,0 +1,12 @@
+<h1>Amsessions</h1>
+<ul>
+    <li ng-repeat="AmSession in Amsessions">
+        <div>
+            <p ng-repeat="(key, val) in model_def">{{key}} : {{AmSession[key]}}</p>
+        </div>
+        <a href="" ui-sref="Amsessions.edit({ id: AmSession.id })">Edit</a>
+        <a href="" ng-click="remove(AmSession)">Delete</a>
+    </li>
+</ul>
+<div ng-show="Amsessions.length === 0">Looks like you haven't added any Amsessions yet?</div>
+<a ng-hide="adding" ui-sref="Amsessions.add">Add A New AmSession</a>
