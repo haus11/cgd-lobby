@@ -76,7 +76,7 @@ module.exports = {
 
             self.loop(game.user, session, 0, function() {
 
-                return res.json({});
+                return res.json(session);
             });
         };
 
