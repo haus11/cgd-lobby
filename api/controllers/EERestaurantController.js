@@ -10,6 +10,7 @@ module.exports = {
 
     create: function(req, res) {
 
+
         var gameID = req.session.gameID;
         var userID = req.session.userID;
 
@@ -49,11 +50,18 @@ module.exports = {
             })
             .then(function(restaurant) {
 
-                return EERestaurant.findOne({id: restaurant.id}).populate('offer').populate('user').populate('round');
+                return [EERestaurant.findOne({id: restaurant.id}).populate('offer').populate('user').populate('round'), EESurvey.findOne({game: gameID, deleted: false, sort: 'createdAt DESC'})];
             })
-            .then(function(restaurant) {
+            .spread(function(restaurant, survey) {
 
-                sails.sockets.emit(UserService.socketToID(Game.subscribers(gameID), req.socket), EEEventService.RESTAURANT_CREATE, restaurant);
+                sails.sockets.emit(UserService.socketToID(Game.subscribers(gameID)), EEEventService.RESTAURANT_CREATE, restaurant);
+
+                if(typeof survey !== 'undefined') {
+
+
+                    EESurveyService.removeRestaurantUser(survey.id, restaurant.user.id);
+                }
+
 
                 return res.json(restaurant);
             })
@@ -101,7 +109,7 @@ module.exports = {
             })
             .then(function(restaurant) {
 
-                sails.sockets.emit(UserService.socketToID(Game.subscribers(gameID), req.socket), EEEventService.RESTAURANT_UPDATE, restaurant);
+                sails.sockets.emit(UserService.socketToID(Game.subscribers(gameID)), EEEventService.RESTAURANT_UPDATE, restaurant);
 
                 return res.json(restaurant);
             })

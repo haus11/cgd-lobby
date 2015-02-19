@@ -253,10 +253,10 @@ module.exports = {
 
     join: function(req, res) {
 
-        //if(req.session.gameID) {
-        //
-        //    return res.badRequest('You are already participating on a server');
-        //}
+        if(req.session.gameID) {
+
+            return res.badRequest('You are already participating on a server');
+        }
 
         var gameID = req.param('gameid');
         var username = req.param('username');
@@ -311,6 +311,7 @@ module.exports = {
 
                             req.session.userID = user.id;
                             req.session.gameID = game.id;
+
                             UserService.set(user, req.socket);
 
                             sails.sockets.emit(UserService.socketToID(Game.subscribers(game)), EventService.GAME_PLAYER_JOIN, user);

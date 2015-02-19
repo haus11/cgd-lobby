@@ -42,6 +42,35 @@ module.exports = {
         }
     },
 
+    removeRestaurantUser: function(surveyID, userID) {
+
+        if(typeof surveyID !== 'undefined' && typeof userID !== 'undefined' && this.surveys.hasOwnProperty('SURVEY'+surveyID)) {
+
+            var survey = this.surveys['SURVEY'+surveyID];
+
+            if(survey.userRestaurantIDs.length <= 0) {
+
+                throw 'All user already created their restaurants.';
+            }
+
+            for(var i = 0; i < survey.userRestaurantIDs.length; ++i) {
+
+
+                if(survey.userRestaurantIDs[i] === userID) {
+
+                    survey.userRestaurantIDs.splice(i, 1);
+
+                    if(survey.userRestaurantIDs.length <= 0) {
+
+                        sails.sockets.emit(UserService.socketToID(Game.subscribers(survey.gameID)), EEEventService.SURVEY_RESTAURANTS);
+                    }
+
+                    break;
+                }
+            }
+        }
+    },
+
     removeUserID: function(surveyID, userID) {
 
         if(typeof surveyID !== 'undefined' && typeof userID !== 'undefined' && this.surveys.hasOwnProperty('SURVEY'+surveyID)) {
@@ -53,6 +82,7 @@ module.exports = {
                 if(survey.userWaitIDs[i] === userID) {
 
                     survey.userWaitIDs.splice(i, 1);
+                    break;
                 }
             }
         }
@@ -91,13 +121,17 @@ module.exports = {
             var survey = this.surveys['SURVEY'+surveyID];
 
             clearInterval(survey.timeIntervalID);
+            survey.timeLeft = survey.timeout;
             //clearTimeout(survey.timeoutID);
 
             if(typeof timeoutUserID !== 'undefined') {
 
                 sails.log.info('Survey user'+timeoutUserID+' timed out');
                 survey.userVotedIDs.push(timeoutUserID);
-                sails.sockets.emit(UserService.socketToID(Game.subscribers(survey.gameID)), EEEventService.SURVEY_TIMEOUT, UserService.get(timeoutUserID).model);
+
+                var user = UserService.get(timeoutUserID);
+
+                sails.sockets.emit(sails.sockets.id(user.socket), EEEventService.SURVEY_TIMEOUT, user.model);
             }
             else {
                 sails.log.info('Survey consult');
@@ -115,12 +149,14 @@ module.exports = {
 
                 survey.timeIntervalID = setInterval(function() {
 
+                    console.log(survey.timeLeft);
                     survey.timeLeft -= 1000;
                     sails.sockets.emit(sails.sockets.id(UserService.get(userIDToConsult).socket), EEEventService.SURVEY_TICK, {timeLeft: survey.timeLeft});
 
                     if(survey.timeLeft <= 0) {
 
                         survey.timeLeft = survey.timeout;
+
                         self.consult(surveyID, userIDToConsult);
                     }
                 }, 1000);
