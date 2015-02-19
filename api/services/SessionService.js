@@ -12,6 +12,7 @@ module.exports = {
 
     getCurrentSession: function(gameID) {
 
+
         if(typeof gameID !== 'undefined' && this.games.hasOwnProperty('GAME' + gameID)) {
 
             return this.games['GAME' + gameID].currentSession;
@@ -24,8 +25,8 @@ module.exports = {
 
         if(typeof gameID !== 'undefined' && typeof session !== 'undefined') {
 
-            this.games['GAME' + gameID] = {};
-            this.games['GAME' + gameID].currentSession = session;
+            this.games['GAME' + gameID] = this.games['GAME' + gameID] || {};
+            this.games['GAME' + gameID].currentSession = _.clone(session);
         }
     },
 
@@ -43,7 +44,7 @@ module.exports = {
 
         if(typeof gameID !== 'undefined' && typeof round !== 'undefined') {
 
-            this.games['GAME' + gameID] = {};
+            this.games['GAME' + gameID] = this.games['GAME' + gameID] || {};
             this.games['GAME' + gameID].currentRound = round;
         }
     }

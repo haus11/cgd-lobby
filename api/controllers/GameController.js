@@ -311,6 +311,7 @@ module.exports = {
 
                             req.session.userID = user.id;
                             req.session.gameID = game.id;
+
                             UserService.set(user, req.socket);
 
                             sails.sockets.emit(UserService.socketToID(Game.subscribers(game)), EventService.GAME_PLAYER_JOIN, user);

@@ -105,7 +105,6 @@ module.exports = {
 
                     sails.sockets.emit(UserService.socketToID(Game.subscribers(targetGame)), EventService.SESSION_NEW, targetSession);
 
-                    res.status(200);
                     return res.json(targetSession);
                 }
             })
