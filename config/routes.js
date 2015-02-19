@@ -99,12 +99,13 @@ module.exports.routes = {
     'PUT    /apple/type'                        : 'AmTypeController.update',
     'DELETE /apple/type/:id'                    : 'AmTypeController.destroy',
 
-    'POST  /apple/offer/'                       : 'OfferController.create',
+    'POST  /apple/offer'                       : 'OfferController.create',
     'PUT   /apple/offer/:offerid'               : 'OfferController.update',
-    'GET   /apple/offer/'                       : 'OfferController.all',
+    'GET   /apple/offer'                       : 'OfferController.all',
     'GET   /apple/offer/:offerid'               : 'OfferController.get',
     'GET   /apple/offer/round/:roundcount'      : 'OfferController.getRound',
-    'GET   /apple/offer/currentRound'           : 'OfferController.getCurrentRound'
+    'GET   /apple/offer/currentRound'           : 'OfferController.getCurrentRound',
+    'GET   /apple/session'                      : 'AmSessionController.create'
 
     /***************************************************************************
      *                                                                          *

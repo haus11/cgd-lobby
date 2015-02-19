@@ -22,7 +22,7 @@ module.exports = {
 
         role: {
             model: 'amrole',
-            type: 'array'
+            required: true
         },
 
         deleted: {

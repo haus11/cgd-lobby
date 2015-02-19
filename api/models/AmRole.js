@@ -17,8 +17,12 @@ module.exports = {
 
       type: {
           type: 'string',
-          enum: ['a', 'b', 'c', 'd', 'e'],
-          defaultsTo: 'a',
+          enum: ['demander', 'supplier'],
+          required: true
+      },
+
+      typeLetter: {
+          type: 'string',
           required: true
       },
 
