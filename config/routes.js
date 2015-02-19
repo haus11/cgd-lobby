@@ -95,6 +95,7 @@ module.exports.routes = {
 
     'POST  /apple/offer'                       : 'OfferController.create',
     'PUT   /apple/offer/:offerid'              : 'OfferController.update',
+    'GET   /apple/offer/currentRound'          : 'OfferController.getCurrentRound'
 
     /***************************************************************************
      *                                                                          *

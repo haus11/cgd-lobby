@@ -29,6 +29,11 @@ module.exports = {
           required: true
       },
 
+      sold: {
+          type: 'boolean',
+          defaultsTo: false
+      },
+
       trades: {
           collection: 'trade',
           type: 'array'

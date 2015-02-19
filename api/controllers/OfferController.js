@@ -22,6 +22,10 @@ module.exports = {
        Offer.create({price: price, seller: userID, round: round.id, tradesMax: 1})
            .then(function (offer) {
 
+               return Offer.findOne({id: offer.id}).populate('seller');
+           })
+           .then(function(offer) {
+
                sails.sockets.emit(UserService.socketToID(Game.subscribers(gameID)), EventService.OFFER_CREATED, offer);
                return res.json(offer);
            })
@@ -80,6 +84,23 @@ module.exports = {
                 sails.log.error(error);
                 return res.badRequest(error);
             });
+    },
+
+    getCurrentRound: function(req, res) {
+
+        var gameId  = req.session.gameID;
+        var round   = SessionService.getCurrentRound(gameId);
+
+        Offer.find({round: round.id})
+            .then(function (rounds) {
+
+                return res.json(rounds);
+            })
+            .catch(function (error) {
+
+                sails.log(error);
+                return res.badRequest(error);
+            })
     }
 };
 
