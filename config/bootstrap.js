@@ -11,5 +11,8 @@
 
 module.exports.bootstrap = function(cb) {
 
+
+    Game.destroy({}).exec();
+
     cb();
 };
