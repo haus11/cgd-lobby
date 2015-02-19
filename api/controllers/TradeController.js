@@ -35,7 +35,7 @@ module.exports = {
 
                     targetOffer = offer;
 
-                    return Trade.create({price: price, accepted: false, buyer: userID, offer: offer.id, lastTurnUserID: userID})
+                    return Trade.create({game: gameID, price: price, accepted: false, buyer: userID, offer: offer.id, lastTurnUserID: userID})
                 }
                 else {
 

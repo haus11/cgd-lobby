@@ -37,6 +37,10 @@ module.exports = {
 
         offer: {
             model: 'offer'
+        },
+
+        game: {
+            model: 'game'
         }
     }
 };
