@@ -80,6 +80,23 @@ module.exports = {
                 sails.log.error(error);
                 return res.badRequest(error);
             });
+    },
+
+    getCurrentRound: function(req, res) {
+
+        var gameId  = req.session.gameID;
+        var round   = SessionService.getCurrentRound(gameId);
+
+        Offer.find({round: round.id})
+            .then(function (rounds) {
+
+                return res.json(rounds);
+            })
+            .catch(function (error) {
+
+                sails.log(error);
+                return res.badRequest(error);
+            })
     }
 };
 
