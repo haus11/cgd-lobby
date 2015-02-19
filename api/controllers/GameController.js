@@ -8,6 +8,18 @@
 module.exports = {
 
 
+
+    remove: function(req, res) {
+
+        Game.destroy({id: { '!=': 0 }}).exec(function(error, data) {
+
+            console.log(error);
+            console.log(data);
+
+            return res.json(data);
+        });
+    },
+
     get: function(req, res) {
 
         var gameID = req.param('gameid');

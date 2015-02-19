@@ -45,6 +45,7 @@ module.exports.routes = {
     'GET    /game/:gameid'                   : 'GameController.get',
     'PUT    /game/:gameid/start'             : 'GameController.start',
     'PUT    /game/:gameid/finish'            : 'GameController.finish',
+    'DELETE /games'                          : 'GameController.remove',
 
     /*
      * Session Routes
