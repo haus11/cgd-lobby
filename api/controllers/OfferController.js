@@ -7,120 +7,76 @@
 
 module.exports = {
 
-    all: function(req, res) {
-
-        Offer.find({})
-            .then(function(offers) {
-
-                return res.json(offers);
-            })
-            .catch(function(error) {
-
-                sails.log.error(error);
-                return res.badRequest(error);
-            });
-    },
-
-    get: function(req, res) {
-
-      var offerId = req.param('offerid');
-
-      Offer.find({id: offerId})
-        .then(function(offers) {
-
-          return res.json(offers);
-        })
-        .catch(function(error) {
-
-          sails.log.error(error);
-          return res.badRequest(error);
-        });
-    },
-
-    getRound: function(req, res) {
-
-      var gameId = req.session.gameID;
-      var roundCount = req.param('roundcount');
-
-      Session.findOne({game: gameId})
-        .then(function (session) {
-
-          console.log(session.id);
-          Round.findOne({count: roundCount, session: session.id})
-            .then(function(round) {
-
-              return res.json(round);
-            })
-            .catch(function (error) {
-
-              return sails.log(res.badRequest(" " + error));
-            });
-        })
-        .catch(function (error) {
-          return sails.log(res.badRequest(" " + error));
-        });
-    },
-
-    getCurrentRound: function(req, res) {
-
-      var gameId  = req.session.gameID;
-      var round   = SessionService.getCurrentRound(gameId);
-
-      Offer.find({round: round.id})
-        .then(function (rounds) {
-
-          return res.json(rounds);
-        })
-        .catch(function (error) {
-
-          sails.log.error(error);
-          return res.badRequest(error);
-        })
-    },
-
     create: function(req, res) {
 
         var price     = req.param('price');
-        var userId    = req.param('userId');
-        var gameId    = req.session.gameID;
-        var roundId   = SessionService.getCurrentRound(gameId);
+        var userID    = req.session.userID;
+        var gameID    = req.session.gameID;
+        var round     = SessionService.getCurrentRound(gameID);
 
-       Offer.create({price: price, seller: userId, round: parseInt(roundId)})
+        if(typeof price === 'undefined') {
+
+            return res.badRequest('Please specify a price');
+        }
+
+       Offer.create({price: price, seller: userID, round: round.id, tradesMax: 1})
            .then(function (offer) {
 
-               sails.sockets.emit(UserService.socketToID(Game.subscribers(gameId)), EventService.OFFER_CREATED, offer);
+               sails.sockets.emit(UserService.socketToID(Game.subscribers(gameID)), EventService.OFFER_CREATED, offer);
                return res.json(offer);
            })
            .catch(function (error) {
 
-               return console.log(res.badRequest(" " + error));
+               sails.log.error(error);
+               return res.badRequest(error);
            });
 
     },
 
     update: function(req, res) {
 
-        var OfferId = req.param('offerid');
+        var userID    = req.session.userID;
+        var gameID    = req.session.gameID;
 
-        Offer.findOne({id: OfferId})
+        var offerID = req.param('offerid');
+        var price = req.param('price');
+
+        if(typeof offerID === 'undefined') {
+
+            return res.badRequest('Please specify an offerID!');
+        }
+
+        if(typeof price === 'undefined') {
+
+            return res.badRequest('Please specify a price!');
+        }
+
+        Offer.findOne({id: offerID}).populate('seller')
             .then(function(offer) {
 
                 if(typeof offer !== 'undefined') {
 
-                    offer.price         = typeof req.param('price')         !== 'undefined' ? req.param('price')        : parseFloat(offer.price);
-                    offer.settledPrice  = typeof req.param('settledPrice')  !== 'undefined' ? req.param('settledPrice') : parseFloat(offer.settledPrice);
+                    if(offer.seller.id !== userID) {
+
+                        throw 'You are not permitted!';
+                    }
+
+                    offer.price = parseFloat(req.param('price'));
 
                     return offer.save();
                 }
                 else {
 
-                    throw 'Offer with ID ' + OfferId + ' not found!';
+                    throw 'Offer was not found!';
                 }
             })
             .then(function(savedOffer) {
+
+                sails.sockets.emit(UserService.socketToID(Game.subscribers(gameID)), EventService.OFFER_UPDATED, savedOffer);
                 return res.json(savedOffer);
             })
             .catch(function(error) {
+
                 sails.log.error(error);
                 return res.badRequest(error);
             });

@@ -8,5 +8,5 @@
 
 module.exports = {
 
-
+    TRANSACTIONS_UPDATED    : 'transaction:updated'
 };

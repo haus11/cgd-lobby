@@ -12,7 +12,7 @@ module.exports = {
         var userID = req.session.userID;
         var gameID = req.session.gameID;
 
-        var offerID = req.param('offerID');
+        var offerID = req.param('offerid');
         var price = req.param('price');
 
         var targetOffer = null;
@@ -35,7 +35,7 @@ module.exports = {
 
                     targetOffer = offer;
 
-                    return Trade.create({price: price, accepted: false, buyer: userID})
+                    return Trade.create({game: gameID, price: price, accepted: false, buyer: userID, offer: offer.id, lastTurnUserID: userID})
                 }
                 else {
 
@@ -51,24 +51,8 @@ module.exports = {
             })
             .then(function(offer) {
 
-                /*
-                var acceptedTrades = 0;
-
-                for(var index = 0; index < offer.trades.length; ++index) {
-
-                    if(offer.trades[index].accepted) {
-
-                        ++acceptedTrades;
-                    }
-                }
-
-                if(acceptedTrades >= offer.tradesMax) {
-
-                    sails.sockets.emit(sails.sockets.id(UserService.get(offer.seller.id).socket), EventService.OFFER_DONE, offer);
-                }*/
-
                 sails.sockets.emit(sails.sockets.id(UserService.get(offer.seller.id).socket), EventService.TRADE_CREATE, targetTrade);
-                return res.json(trade);
+                return res.json(targetTrade);
             })
             .catch(function(error) {
 
@@ -82,7 +66,7 @@ module.exports = {
         var userID = req.session.userID;
         var gameID = req.session.gameID;
 
-        var tradeID = req.param('tradeID');
+        var tradeID = req.param('tradeid');
         var price = req.param('price');
 
 
@@ -96,19 +80,122 @@ module.exports = {
             return res.badRequest('Please send a price.');
         }
 
-        Trade.findOne({id: tradeID}).populate('buyer')
+        Trade.findOne({id: tradeID, accepted: false}).populate('buyer').populate('offer')
             .then(function(trade) {
 
                 if(typeof trade !== 'undefined') {
 
+                    if(trade.lastTurnUserID === userID) {
+
+                        throw 'It is not your turn!';
+                    }
+
                     trade.price = price;
+                    trade.lastTurnUserID = userID;
 
                     return trade.save();
                 }
                 else {
 
-                    throw 'The offer could not be found.';
+                    throw 'The offer could not be found or was accepted.';
                 }
+            })
+            .then(function(trade) {
+
+                //update comes from buyer
+                if(trade.buyer.id === userID) {
+
+                    sails.sockets.emit(sails.sockets.id(UserService.get(trade.offer.seller).socket), EventService.TRADE_UPDATE, trade);
+                }
+                //update comes from seller
+                else {
+
+                    sails.sockets.emit(sails.sockets.id(UserService.get(trade.buyer.id).socket), EventService.TRADE_UPDATE, trade);
+                }
+
+                return res.json(trade);
+            })
+            .catch(function(error) {
+
+                sails.log.error(error);
+                return res.badRequest(error);
+            });
+    },
+
+    accept: function(req, res) {
+
+        var userID = req.session.userID;
+        var gameID = req.session.gameID;
+
+        var tradeID = req.param('tradeid');
+        var targetTrade = null;
+
+        if(typeof tradeID === 'undefined') {
+
+            return res.badRequest('Please send a tradeID.');
+        }
+
+        Trade.findOne({id: tradeID, accepted: false}).populate('buyer').populate('offer')
+            .then(function(trade) {
+
+                if(typeof trade !== 'undefined') {
+
+                    if(trade.lastTurnUserID === userID) {
+
+                        throw 'It is not your turn!';
+                    }
+
+                    trade.accepted = true;
+                    trade.lastTurnUserID = userID;
+
+                    return trade.save();
+                }
+                else {
+
+                    throw 'The offer could not be found or was already accepted.';
+                }
+            })
+            .then(function(trade) {
+
+                targetTrade = trade;
+
+                AMTransactionService.build(trade, function(transaction) {
+
+                    console.log(transaction);
+                    sails.sockets.emit(UserService.socketToID(Game.subscribers(gameID)), AMEventService.TRANSACTIONS_UPDATED, transaction);
+                });
+
+                //update comes from buyer
+                if(trade.buyer.id === userID) {
+
+                    sails.sockets.emit(sails.sockets.id(UserService.get(trade.offer.seller).socket), EventService.TRADE_ACCEPT, trade);
+                }
+                //update comes from seller
+                else {
+
+                    sails.sockets.emit(sails.sockets.id(UserService.get(trade.buyer.id).socket), EventService.TRADE_ACCEPT, trade);
+                }
+
+                return Offer.findOne({id: trade.offer.id}).populate('trades');
+            })
+            .then(function(offer) {
+
+                var acceptedTrades = 0;
+
+                for(var index = 0; index < offer.trades.length; ++index) {
+
+                    if(offer.trades[index].accepted) {
+
+                        ++acceptedTrades;
+                    }
+                }
+
+                if(acceptedTrades >= offer.tradesMax) {
+
+                    sails.sockets.emit(UserService.socketToID(Game.subscribers(gameID)), EventService.OFFER_DONE, offer);
+                }
+
+                return res.json(targetTrade);
             })
             .catch(function(error) {
 

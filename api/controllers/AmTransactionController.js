@@ -144,10 +144,12 @@ module.exports = {
 
     getCompletedTransactions: function(req, res) {
 
-        Trades.find({accepted: true})
-            .then(function(trades) {
+        var gameID = req.session.gameID;
 
+        AmTransaction.find({game: gameID})
+            .then(function(transactions) {
 
+                return res.json(transactions);
             })
             .catch(function(error) {
 
@@ -155,6 +157,7 @@ module.exports = {
                 return res.badRequest(error);
             });
 
+        /*
         AmTransaction.find({})
             .then(function(amTransactions) {
 
@@ -165,6 +168,6 @@ module.exports = {
 
                 sails.log(error);
                 return res.badRequest(error);
-            });
+            });*/
     }
 };

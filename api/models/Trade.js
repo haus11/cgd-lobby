@@ -26,8 +26,21 @@ module.exports = {
             required: true
         },
 
+        lastTurnUserID: {
+            type: 'integer',
+            required: true
+        },
+
         buyer: {
             model: 'user'
         },
+
+        offer: {
+            model: 'offer'
+        },
+
+        game: {
+            model: 'game'
+        }
     }
 };

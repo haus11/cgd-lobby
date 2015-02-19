@@ -54,7 +54,15 @@ module.exports.routes = {
     'POST  /game/session/round'                     : 'SessionController.createRound',
     'GET   /game/:gameid/sessions'                  : 'SessionController.allForGame',
 
-    'POST  /apple/game/session'                          : 'AmSessionController.create',
+    'POST  /apple/game/session'                     : 'AmSessionController.create',
+
+    /*
+     * Trade & Offer Routes
+     */
+
+    'POST  /offer/:offerid/trade'               : 'TradeController.create',
+    'PUT   /trade/:tradeid'                     : 'TradeController.update',
+    'PUT   /trade/:tradeid/accept'              : 'TradeController.accept',
 
     /*
      * EntryExit Routes
@@ -65,13 +73,6 @@ module.exports.routes = {
 
     'POST  /ee/survey'                              : 'EESurveyController.create',
     'POST  /ee/survey/vote'                         : 'EESurveyController.vote',
-
-    'POST  /ee/offer/'                              : 'OfferController.create',
-    'PUT   /ee/offer/:offerid'                      : 'OfferController.update',
-    'GET   /ee/offer/'                              : 'OfferController.all',
-    'GET   /ee/offer/:offerid'                      : 'OfferController.get',
-    'GET   /ee/offer/round/:roundcount'             : 'OfferController.getRound',
-    'GET   /ee/offer/currentRound'                  : 'OfferController.getCurrentRound',
 
 
     /*
@@ -92,19 +93,8 @@ module.exports.routes = {
     'GET    /apple/transaction/server/:server'  : 'AmTransactionController.getTransactionsOfServer',
     'GET    /apple/completedTransactions'       : 'AmTransactionController.getCompletedTransactions',
 
-    'GET    /apple/type'                        : 'AmTypeController.find',
-    'GET    /apple/type/:id'                    : 'AmTypeController.findOne',
-    'POST   /apple/type'                        : 'AmTypeController.create',
-    'PUT    /apple/type'                        : 'AmTypeController.update',
-    'DELETE /apple/type/:id'                    : 'AmTypeController.destroy',
-
     'POST  /apple/offer'                       : 'OfferController.create',
-    'PUT   /apple/offer/:offerid'               : 'OfferController.update',
-    'GET   /apple/offer'                       : 'OfferController.all',
-    'GET   /apple/offer/:offerid'               : 'OfferController.get',
-    'GET   /apple/offer/round/:roundcount'      : 'OfferController.getRound',
-    'GET   /apple/offer/currentRound'           : 'OfferController.getCurrentRound',
-    'GET   /apple/session'                      : 'AmSessionController.create'
+    'PUT   /apple/offer/:offerid'              : 'OfferController.update',
 
     /***************************************************************************
      *                                                                          *

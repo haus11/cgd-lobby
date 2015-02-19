@@ -20,18 +20,23 @@ module.exports = {
             required: true
         },
 
+        game:{
+            model: 'game',
+            required: true
+        },
+
         price: {
             type: 'float',
             required: true
         },
 
         round: {
-            model: 'round',
+            type: 'integer',
             required: true
         },
 
         session: {
-            model: 'session',
+            type: 'integer',
             required: true
         }
     }
