@@ -14,6 +14,7 @@ module.exports = {
 
         var offerID = req.param('offerid');
         var price = req.param('price');
+        var directAccept = req.param('direct');
 
         var targetOffer = null;
         var targetTrade = null;
@@ -28,18 +29,18 @@ module.exports = {
             return res.badRequest('Please send a price.');
         }
 
-        Offer.findOne({id: offerID}).populate('seller')
+        Offer.findOne({id: offerID, sold: false}).populate('seller')
             .then(function(offer) {
 
                 if(typeof offer !== 'undefined') {
 
                     targetOffer = offer;
 
-                    return Trade.create({game: gameID, price: price, accepted: false, buyer: userID, offer: offer.id, lastTurnUserID: userID})
+                    return Trade.create({game: gameID, price: price, accepted: false, buyer: userID, offer: offer.id, lastTurnUserID: userID});
                 }
                 else {
 
-                    throw 'The offer could not be found.';
+                    throw 'The offer could not be found or is sold.';
                 }
             })
             .then(function(trade) {
@@ -50,6 +51,14 @@ module.exports = {
 
             })
             .then(function(offer) {
+
+                if(directAccept === true) {
+
+                    req.offer = offer;
+                    req.directAccept = true;
+                    req.trade = targetTrade;
+                    return sails.controllers.trade.accept(req, res);
+                }
 
                 sails.sockets.emit(sails.sockets.id(UserService.get(offer.seller.id).socket), EventService.TRADE_CREATE, targetTrade);
                 return res.json(targetTrade);
@@ -130,6 +139,16 @@ module.exports = {
         var tradeID = req.param('tradeid');
         var targetTrade = null;
 
+        if(req.directAccept === true) {
+
+            tradeID = req.trade.id;
+
+            if(parseFloat(req.trade.price) !== parseFloat(req.offer.price)) {
+
+                throw 'Trade price must be offer price for direct accept!';
+            }
+        }
+
         if(typeof tradeID === 'undefined') {
 
             return res.badRequest('Please send a tradeID.');
@@ -140,7 +159,7 @@ module.exports = {
 
                 if(typeof trade !== 'undefined') {
 
-                    if(trade.lastTurnUserID === userID) {
+                    if(trade.lastTurnUserID === userID && !req.directAccept) {
 
                         throw 'It is not your turn!';
                     }
@@ -186,7 +205,11 @@ module.exports = {
 
                 if(acceptedTrades >= offer.tradesMax) {
 
-                    sails.sockets.emit(UserService.socketToID(Game.subscribers(gameID)), EventService.OFFER_DONE, offer);
+                    offer.sold = true;
+                    offer.save(function(error, result) {
+
+                        sails.sockets.emit(UserService.socketToID(Game.subscribers(gameID)), EventService.OFFER_DONE, result);
+                    });
                 }
 
                 return res.json(targetTrade);
