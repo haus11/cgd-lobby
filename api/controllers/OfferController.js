@@ -85,7 +85,7 @@ module.exports = {
         var gameId    = req.session.gameID;
         var roundId   = SessionService.getCurrentRound(gameId);
 
-       Offer.create({price: price, user: userId, round: parseInt(roundId)})
+       Offer.create({price: price, seller: userId, round: parseInt(roundId)})
            .then(function (offer) {
 
                sails.sockets.emit(UserService.socketToID(Game.subscribers(gameId)), EventService.OFFER_CREATED, offer);

@@ -26,12 +26,8 @@ module.exports = {
             required: true
         },
 
-        user: {
+        buyer: {
             model: 'user'
         },
-
-        offer: {
-            model: 'offer'
-        }
     }
 };
