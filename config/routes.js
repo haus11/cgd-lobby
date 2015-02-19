@@ -54,7 +54,7 @@ module.exports.routes = {
     'POST  /game/session/round'                     : 'SessionController.createRound',
     'GET   /game/:gameid/sessions'                  : 'SessionController.allForGame',
 
-    'POST  /apple/session'                          : 'AmSessionController.create',
+    'POST  /apple/game/session'                          : 'AmSessionController.create',
 
     /*
      * EntryExit Routes
