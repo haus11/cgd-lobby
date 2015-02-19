@@ -18,5 +18,11 @@ module.exports = {
 
 
     SESSION_NEW         : 'session:new',
-    SESSION_NEW_ROUND   : 'session:newRound'
+    SESSION_NEW_ROUND   : 'session:newRound',
+
+
+
+    TRADE_CREATE        : 'trade:created',
+    TRADE_UPDATE        : 'trade:updated',
+    TRADE_ACCEPT        : 'trade:accepted'
 };

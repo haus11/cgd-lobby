@@ -56,6 +56,15 @@ module.exports.routes = {
 
     'POST  /apple/game/session'                          : 'AmSessionController.create',
 
+
+    /*
+     * Trade & Offer Routes
+     */
+
+    'POST  /offer/:offerid/trade'               : 'TradeController.create',
+    'PUT   /trade/:tradeid'                     : 'TradeController.update',
+    'PUT   /trade/:tradeid/accept'              : 'TradeController.accept',
+
     /*
      * EntryExit Routes
      */

@@ -81,11 +81,11 @@ module.exports = {
     create: function(req, res) {
 
         var price     = req.param('price');
-        var userId    = req.param('userId');
+        var userId    = req.session.userID;
         var gameId    = req.session.gameID;
-        var roundId   = SessionService.getCurrentRound(gameId);
+        var round     = SessionService.getCurrentRound(gameId);
 
-       Offer.create({price: price, seller: userId, round: parseInt(roundId)})
+       Offer.create({price: price, seller: userId, round: round.id, tradesMax: 1})
            .then(function (offer) {
 
                sails.sockets.emit(UserService.socketToID(Game.subscribers(gameId)), EventService.OFFER_CREATED, offer);
