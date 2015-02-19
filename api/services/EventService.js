@@ -14,13 +14,12 @@ module.exports = {
     GAME_START          : 'game:started',
     GAME_FINISH         : 'game:finished',
 
-    OFFER_CREATED       : 'offer:create',
-
+    OFFER_CREATED       : 'offer:created',
+    OFFER_UPDATED       : 'offer:updated',
+    OFFER_DONE          : 'offer:done',
 
     SESSION_NEW         : 'session:new',
     SESSION_NEW_ROUND   : 'session:newRound',
-
-
 
     TRADE_CREATE        : 'trade:created',
     TRADE_UPDATE        : 'trade:updated',
