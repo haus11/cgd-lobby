@@ -36,7 +36,7 @@ module.exports = {
                         throw 'Name and price is required';
                     }
 
-                    return Offer.create({price: price, user: userID, round: round});
+                    return Offer.create({price: price, seller: userID, round: round});
                 }
                 else {
 

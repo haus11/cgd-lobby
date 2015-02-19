@@ -10,7 +10,6 @@ module.exports = {
 
     loop: function(user, session, index, cb) {
 
-        console.log(index);
         if(index === user.length) {
 
             return cb();
@@ -20,8 +19,6 @@ module.exports = {
         var promise  = null;
 
         if(currentUser.type === 'player') {
-
-            session.count = 1;
 
             var playerRoleIndex = index % (AMRoleService.amountOfTypes);
             var playerType = AMRoleService.getPlayerRole(playerRoleIndex);

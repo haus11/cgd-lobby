@@ -20,7 +20,7 @@ module.exports = {
           required: true
       },
 
-      user: {
+      seller: {
           model: 'user'
       },
 
@@ -30,7 +30,13 @@ module.exports = {
       },
 
       trades: {
-          collection: 'trade'
+          collection: 'trade',
+          type: 'array'
+      },
+
+      tradesMax: {
+          type: 'integer',
+          required: true
       }
   }
 };
