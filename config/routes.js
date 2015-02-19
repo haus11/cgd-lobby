@@ -56,7 +56,6 @@ module.exports.routes = {
 
     'POST  /apple/game/session'                     : 'AmSessionController.create',
 
-
     /*
      * Trade & Offer Routes
      */
