@@ -13,7 +13,7 @@ angular.module('equilibrium')
     var modules = {
       apple: {
         name: 'Applemarket',
-        url:  'http://apple.haus11.org/'//'http://192.168.0.198:9000/#/' //
+        url:  'http://localhost:9000/#'//'http://192.168.0.198:9000/#/' //
       },
 
       exitEntry: {

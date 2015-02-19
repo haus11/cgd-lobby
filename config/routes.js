@@ -90,8 +90,7 @@ module.exports.routes = {
     'GET    /apple/transaction/round/:round'    : 'AmTransactionController.getTransactionsOfRound',
     'GET    /apple/transaction/session/:session': 'AmTransactionController.getTransactionsOfSession',
     'GET    /apple/transaction/server/:server'  : 'AmTransactionController.getTransactionsOfServer',
-
-    'GET    /apple/transaction/testMethod'      : 'AmTransactionController.testMethod',
+    'GET    /apple/completedTransactions'       : 'AmTransactionController.getCompletedTransactions',
 
     'GET    /apple/type'                        : 'AmTypeController.find',
     'GET    /apple/type/:id'                    : 'AmTypeController.findOne',

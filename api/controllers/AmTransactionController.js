@@ -140,5 +140,31 @@ module.exports = {
                 res.badRequest(err);
             }
         });
+    },
+
+    getCompletedTransactions: function(req, res) {
+
+        Trades.find({accepted: true})
+            .then(function(trades) {
+
+
+            })
+            .catch(function(error) {
+
+                sails.log(error);
+                return res.badRequest(error);
+            });
+
+        AmTransaction.find({})
+            .then(function(amTransactions) {
+
+
+                return res.json(amTransactions);
+            })
+            .catch(function(error) {
+
+                sails.log(error);
+                return res.badRequest(error);
+            });
     }
 };

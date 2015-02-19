@@ -9,7 +9,6 @@ module.exports = {
 
     attributes: {
 
-
         id: {
             primaryKey: true,
             type: 'integer',
@@ -18,7 +17,7 @@ module.exports = {
 
         transactionNmbr: {
             type: 'integer',
-            required: 'true;'
+            required: true
         },
 
         price: {
@@ -26,41 +25,14 @@ module.exports = {
             required: true
         },
 
-        finished: {
-            type: 'boolean',
-            defaultsTo: false
-        },
-
-        status: {
-            type: 'string',
-            enum: ['processing', 'waiting', 'accepted', 'undefined'],
-            defaultsTo: 'undefined'
-        },
-
-        deleted: {
-            type: 'boolean',
-            defaultsTo: false
-        },
-
-        /*
-        buyer: {
-            model: 'Player'
-        },
-
-        seller: {
-            model: 'Player'
-        },
-
         round: {
-            model: 'Round'
+            model: 'round',
+            required: true
         },
 
         session: {
-            model: 'Session'
-        },
-        */
-        game: {
-            model: 'game'
+            model: 'session',
+            required: true
         }
     }
 };
