@@ -49,7 +49,7 @@ angular.module('equilibrium')
       },
 
       getGameUrl: function(module, gameId) {
-        return modules[module.name].url + 'join/' + gameId;
+        return module.url + '/#/join/' + gameId;
       }
     };
   });

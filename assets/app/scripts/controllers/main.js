@@ -12,6 +12,7 @@ angular.module('equilibrium')
         $scope.availableGames = dataService.getAvailableGames();
 
         $scope.generateGameUrl = function(game) {
+            console.log(game);
           return dataService.getGameUrl(game.module, game.id);
         };
 
