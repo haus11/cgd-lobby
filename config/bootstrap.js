@@ -12,5 +12,6 @@
 module.exports.bootstrap = function(cb) {
 
 
+    sails.controllers.game.remove();
     cb();
 };
