@@ -268,10 +268,11 @@ module.exports = {
 
     join: function(req, res) {
 
+        /*
         if(req.session.gameID) {
 
             return res.badRequest('You are already participating on a server');
-        }
+        }*/
 
         var gameID = req.param('gameid');
         var username = req.param('username');
@@ -378,10 +379,11 @@ module.exports = {
 
     create: function(req, res) {
 
+        /*
         if(req.session.gameID) {
 
             return res.badRequest('You are already participating on a server');
-        }
+        }*/
 
         var playerMax = req.param('playerMax') || 20;
         var name = req.param('name');
